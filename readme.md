@@ -32,3 +32,12 @@ hexo\themes\next\layout\_partials\header.swig line41
 fix FATAL Permission denied (publickey)
 $ ssh-add ~/.ssh/id_rsa
 $ ssh-add -l
+
+
+#换电脑的话...
+_config.yml，theme/，source/，scaffolds/，package.json，.gitignore，是需要拷贝的
+1. 密钥弄好
+2. npm install -g hexo
+3. npm install
+4. npm install hexo-deployer-git --save
+(千万不要hexo init)
