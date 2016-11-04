@@ -26,9 +26,9 @@ $ cd themes/hexo-theme-next
 $ git pull
 
 #修改
-#hexo\themes\next\layout\_partials\header.swig line41
-#{{ __('menu.' + itemName) }}
+hexo\themes\next\layout\_partials\header.swig line41
+{{ __('menu.' + itemName) }}
 
-#fix FATAL Permission denied (publickey)
-#$ ssh-add ~/.ssh/id_rsa
-#$ ssh-add -l
+fix FATAL Permission denied (publickey)
+$ ssh-add ~/.ssh/id_rsa
+$ ssh-add -l
