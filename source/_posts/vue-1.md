@@ -1,16 +1,17 @@
 ---
 title: Vue.js学习笔记一：入门
 date: 2016-08-18 19:05:16
-tags: [Vue,MVVM,模块化]
+tags: [Vue, MV*框架]
 categories:
- - MV*框架
+ - 学习笔记
 ---
+
 ## 前言
 　　vue是法语中视图的意思，Vue.js是一个轻巧、高性能、可组件化的MVVM库。
 　　`MV*`可能大家都经常听说，我们先来理解一下`MV*`的概念。
+<!--more-->
 ### 出现的背景
 　　MVC开始是存在于桌面程序中的，但由于后端的mvc框架的v层越来越重，后端的MVC思想就搬移到了前端。随着前端代码越来越重，能力越来越大，重前端的系统越来越多地涌现出来。前端为主的MV*时代中，前端在MVC的结构指导下分为model(模型), view(视图)， controller(控制器)三部分。而controller慢慢演化为presenter和viewmodel。MVC, MVP, MVVM框架不断涌现。
-<!--more-->
 ### MVC, MVP, MVVM
 - MVC(model-view-controller)，如backbone, angular(较高版本是mvvm, 也许说它是MVW更准确)。
 　　View: 与页面上元素直接相关的部分，包括html，CSS和一部分直接控制页面元素的JS。它可以从Model中得到数据，并将其显示到页面上。
@@ -281,7 +282,7 @@ export default {
         <hr/>
       </li>
     </ul>
-        
+
     <p>Do you like me? {{childWords}}</p>
     <component-a msgfromfa="(Just Say U Love Me)"></component-a>
   </div>

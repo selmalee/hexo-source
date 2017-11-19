@@ -1,9 +1,9 @@
 ---
-title: 作品
+title: 技能
 date: 2016-07-24 20:54:42
 type: works
 ---
-![作品一览](/static/2016/08/works.png)
+<!-- ![作品一览](/static/2016/08/works.png)
 ### 武汉大学镝次元数据传媒实验室期间作品
 1.  [撕裂之痛：中国失踪儿童不完全档案](http://www.dyclub.org/projects/LostChildren/) 2016.05
 与实验室同学合作作品，主要用到swiper.js，d3.js框架
@@ -25,4 +25,10 @@ type: works
 仿慕课网视频，主要用到canvas等技术
 
 ### 更多作品
-更多早期作品详见[wordpress博客](http://119.29.142.213/)
+更多早期作品详见[wordpress博客](http://119.29.142.213/) -->
+
+ - html css less bootstrap.js
+ - javascript ajax nodejs gulp
+ - vue.js swig.js
+ - d3.js
+ - php mysql linux

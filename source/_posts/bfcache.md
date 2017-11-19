@@ -1,12 +1,14 @@
 ---
 title: BFCache相关
 date: 2016-08-29 16:47:00
-tags: [bfcache,往返存储,pageshow,pagehide,persisted]
+tags: bfcache
 categories:
- - http相关
+ - 学习笔记
 ---
+
 ## 前言
 一些浏览器中返回按钮是直接使用缓存的，不会执行任何js代码，例如, 在提交的时候将按钮设置为loading状态，如果在提交成功后没有对按钮进行处理，那么返回后按钮依然是loading状态，这种体验很差。
+<!--more-->
 ![example](http://119.29.142.213/static/201608/bfcacheex.png)
 这是因为：
 部分浏览器在后退时**不会**触发onload事件，這是HTML5世代浏览器新增的特性之一——Back-Forward Cache(简称bfcache)
@@ -15,9 +17,8 @@ categories:
 我们熟悉的红本本《JavaScript高级程序设计》有提及bfcache：
 
  > bfcache，即back-forward cache，可称为“往返缓存”，可以在用户使用浏览器的“后退”和“前进”按钮时加快页面的转换速度。这个缓存不仅保存页面数据，还保存了DOM和JS的状态，实际上是将整个页面都保存在内存里。如果页面位于bfcache中，那么再次打开该页面就不会触发onload事件
- > 
+ >
 
-<!--more-->
 ### pageshow事件
  这个事件在页面显示时触发，无论页面是否来自bfcache。在重新加载的页面中，pageshow会在load事件触发后触发；而对于bfcache中的页面，pageshow会在页面状态完全恢复的那一刻触发。
 
@@ -26,7 +27,7 @@ categories:
 
 ### persisted属性
  pageshow事件和pagehide事件的event对象还包含一个名为persisted的布尔值属性。
- 
+
   - 对于pageshow事件，如果页面是从bfcache中加载的，则这个属性的值为true；否则，这个属性的值为false。
   - 对于pagehide事件，如果页面在卸载之后被保存在bfcache中，则这个属性的值为true；否则，这个属性的值为false。
 
@@ -82,9 +83,9 @@ DOM
  | browser | 新载入会触发load和pageshow事件，回上页时不触发任何事件且红色被保留，有bfcache（存疑） |
  可以看到，Safari、Firefox、UC、qq浏览器、browser保留了红色，有往返缓存。
  回到上页时，
- 
+
   - Safari、UC和qq浏览器都不会触发load；
-  - IE、Firefox、Chrome和Opera会触发load；  
+  - IE、Firefox、Chrome和Opera会触发load；
   - browser不触发任何事件。
 
 ## 解决方案
@@ -106,7 +107,7 @@ Firefox的[开发者文档](https://developer.mozilla.org/en-US/Firefox/Releases
 ``` js
 window.addEventListener('pageshow', function( e ){
 	if (e.persisted) {
-		window.location.reload() 
+		window.location.reload()
 	}
 })
 ```
@@ -135,7 +136,7 @@ Safari、UC、qq浏览器测试通过。browser依然会保留红色，我认为
 <%
   response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
   response.setHeader("Expires", "0");
-  response.setHeader("Pragma","no-cache"); 
+  response.setHeader("Pragma","no-cache");
 %>
 </head>
 ```
@@ -148,7 +149,7 @@ Safari、UC、qq浏览器测试通过。browser依然会保留红色，我认为
 <input type="hidden" id="SERVER_TIME" value="${now.getTime()}"/>
 <script>
 //每次webview重新打开H5首页，就把server time记录本地存储
-var SERVER_TIME = document.getElementById("SERVER_TIME"); 
+var SERVER_TIME = document.getElementById("SERVER_TIME");
 var REMOTE_VER = SERVER_TIME && SERVER_TIME.value;
 if(REMOTE_VER){
     var LOCAL_VER = sessionStorage && sessionStorage.PAGEVERSION;

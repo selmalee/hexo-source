@@ -1,18 +1,18 @@
 ---
 title: ajax与跨域
 date: 2016-09-20 21:00:02
-tags: [Ajax,跨域,JavaScript,jQuery]
+tags: [Ajax,JavaScript]
 categories:
- - http相关
+ - 学习笔记
 ---
 
 最近想整理一下ajax与跨域方面的知识。
 首先，我来复习一下ajax的写法，大神们自行绕过。
-
+<!-- more -->
 ## ajax
 
 AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）。它是在不重新加载整个页面的情况下，与服务器交换数据并更新部分网页的艺术。
-<!-- more -->
+
 ### 基本写法
 
 ``` js
@@ -265,7 +265,7 @@ XSS 是实现 CSRF 的诸多途径中的一条。CRSF（Cross-site request forge
 一些防御措施：
  - 判断 referer：在HTTP头中有一个字段叫Referer，它记录了该HTTP请求的来源地址。网站可以对每一个请求验证其Referer值，如果Referer是其他网站的话就拒绝该请求。但是也有侵入者手动改变了referer值的可能。
  - 在请求地址中添加token并验证：系统开发者可以在HTTP请求中以参数的形式加入一个随机产生的token，并在服务器端建立一个拦截器来验证这个token，如果请求中没有token或者token内容不正确，则认为可能是CSRF攻击而拒绝该请求。如果放到地址不够安全，也可以把token放到HTTP头中自定义的属性并验证。
- 
+
 详细解释请看参考文章[XSS 和 CSRF 攻击](http://www.cnblogs.com/imwtr/p/4763457.html)。
 
 ## 参考

@@ -1,16 +1,14 @@
 ---
 title: JavaScript Promise API
 date: 2016-08-28 11:01:57
-tags: [promsie,es6,javascript]
-categories: 
- - JavaScript
+tags: [Es6,Javascript]
+categories:
+ - 学习笔记
 ---
 
 本文译自[https://davidwalsh.name/promises](https://davidwalsh.name/promises)
-
+<!-- more -->
 虽然同步代码更容易跟踪和调试，但是异步的性能和灵活性通常更好。为什么在你可以立刻发起多个请求，然后在每个都准备好了的时候处理它们时，要停下来等呢？Promises正在成为JavaScript世界的一个重要组成部分，有许多新的API正在与Promise理念来实施。下面让我们来看看promise及其API是如何使用的！
-
-<!--more-->
 
 ## **在自然环境下的Promises**
 XMLHttpRequest API是异步的，但*不*使用Promises API。然而，现在有一些原生API使用promises：
@@ -239,7 +237,7 @@ Promise.all([req1, req2]).then(function(results) {
 
 ## Promise.race
 `Promise.race`是一个有趣的函数————一旦数组中任何一个Promise被解决或者拒绝，`Promise.race`就会触发，而不会等待所有的promise对象被解决或者拒绝。
-``` js 
+``` js
 var req1 = new Promise(function(resolve, reject) {
 	// A mock async action using setTimeout
 	setTimeout(function() {

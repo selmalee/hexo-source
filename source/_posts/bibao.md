@@ -1,13 +1,15 @@
 ---
 title: JavaScript学习笔记之闭包
 date: 2016-08-06 20:57:42
-tags: [JavaScript,闭包]
+tags: JavaScript
 categories:
- - JavaScript
+ - 学习笔记
 ---
+
 ## 作用域相关定义
 &emsp;&emsp;在说闭包之前，我们首先说一下作用域。
 &emsp;&emsp;JavaScript中有全局作用域，函数作用域。看下面的代码
+<!--more-->
 ``` js
 var a = 10;//全局作用域中定义变量
 (function(){
@@ -25,7 +27,6 @@ for(var item in {a:1,b:2}){
 console.log(item); //没有块级作用域，可以访问item
 ```
 &emsp;&emsp;这里顺带一提，ES6提出了块级作用域及新变量声明（let）。
-<!--more-->
 &emsp;&emsp;JS使用var声明变量，以function来划分作用域，大括号“{}” 却限定不了var的作用域。用var声明的变量具有变量提升（declaration hoisting，即先试用后声明不报错）的效果。
 &emsp;&emsp;ES6里增加了一个let，可以在{}， if， for里声明。用法同var，但作用域限定在块级，let声明的变量不存在变量提升。
 ## 什么是闭包
@@ -95,7 +96,7 @@ for(var i = 0; i < 4; i++){
 &emsp;&emsp;在点击某个div的时候，执行回调函数，这个时候函数才会动态地拿到i的值。这一切是在整个过程初始化之后的，在初始化之后i的值就已经是4了。
 &emsp;&emsp;那怎么样才能达到想要的效果呢？看下面的代码
 ``` js
-document.body.innerHTML = "<div id='div1'>aaa</div>" + 
+document.body.innerHTML = "<div id='div1'>aaa</div>" +
 	"<div id='div2'>bbb</div>" + "<div id='div3'>ccc</div>";
 for(var i = 0; i < 4; i++){
 	!function(i){

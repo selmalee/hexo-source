@@ -1,16 +1,16 @@
 ---
 title: SafeFrames v1.1
 date: 2016-08-24 00:37:00
-tags: [SafeFrame,iab,iframe]
-categories: 
+tags: SafeFrame
+categories:
  - 译文
 ---
 
-# **iab.(Interactive Advertising Bureau)** 
+# **iab.(Interactive Advertising Bureau)**
 ### **安全框架**
 ### 版本1.1 草案
 #### 2014年8月发布
-
+<!-- more -->
 
 ----------
 
@@ -18,7 +18,6 @@ categories:
 
 SafeFrame规范是由来自21个IAB成员公司的志愿者组成的工作小组开发的。
 
-<!--more-->
 SafeFrame工作小组的领导者是：
 
  - 肖恩·斯奈德，雅虎公司（Sean Snider, Yahoo!）
@@ -207,9 +206,9 @@ SafeFrame管理两方之间的互动：主站和第三方。主站拥有一个�
 
 在许多情况下，第三方内容提供商可能完全不需要修改内容代码，但是当内容需要以某种方式与主站进行交互如内容扩展的时候，第三方就需要用一个JavaScript格式的标签把SafeFrame API的细节包括在内。
 
-> **通用注意事项** 
+> **通用注意事项**
 > 如果第三方内容需要与它投放的主站进行互动，SafeFrame1.0所提供的容器管理技术只需要对第三方内容修改代码。例如，任何扩展或浮动的行为都需要修改一些代码，并且必须在JavaScript中进行。而限制于SafeFrame容器里的任何丰富的交互不需要修改。
-> 
+>
 
 #### 1.1.3 API
 SafeFrame规范了一个提供主站和第三方内容之间的通信协议的API。使用该API，主机主站可以在必要时给第三方内容提供信息，第三方内容可以向主站请求服务（即扩展）。
@@ -393,7 +392,7 @@ SafeFrame的目标是提供将内容从外部源（第三方内容）传递到�
  4. **外部请求：**浏览器使用主站提供的URL向外部服务器请求内容。
  5. **第三方内容请求：**被请求的第三方内容直接传递到SafeFrame iframe中。
 
- 
+
 #### 2.1.3 渲染SafeFrame
  在部分2.1.1和2.1.2的图片分别说明传递模式A和传递模式B之间的差异。下面的图描述在一个高层次，浏览器如何使用主站服务器发送来的SafeFrame指令初始化SafeFrame API和在其中渲染第三方内容。
 
@@ -423,7 +422,7 @@ SafeFrame的目标是提供将内容从外部源（第三方内容）传递到�
 #### 2.2.1 JavaScript host库和API
  JavaScript的host库和API是用来控制和渲染SafeFrame容器的。该库提供了命名空间，类和函数，这些将在第4章中进一步描述。
 
-> **主站实现注意事项** 
+> **主站实现注意事项**
 > 一个SafeFrame可能包括：一个网页视图（移动端），一个嵌入式浏览器，一个HTA（微软HTML应用程序），或原用户的Web浏览器。
 >
 
@@ -467,7 +466,7 @@ HTML文件是用来提供一个第三方HTML内容渲染成的基础级的HTML�
 
 用于访问SafeFrame资源的URI的部分完全是由主站定义的，但必须按指定的顺序提供并按下面的细节描述：
 
- 1. 协议 (例如http, https等等) 
+ 1. 协议 (例如http, https等等)
  2. 二级域名（和端口，如果适用的话）
  3. 通向SafeFrame资源的根路径（允许多个目录，用/分隔）
  4. SafeFrame的版本号，格式为“N-N-N”
@@ -517,14 +516,14 @@ SafeFrame可能会为它控制的HTML元素增加一个CSS类，但主站和第�
  - **作为JavaScript字符串的原始的HTML（传递模式A）**
  由于JavaScript处理某些字符和SCRIPT标签时不同于HTML，主站可能必须在发送给SafeFrame API处理之前，修改任何原始的HTML内容。
  例如，下面的HTML字符串被当做JavaScript处理时，会报一个语法错误：
- 
+
  ``` html
 <script type="text/javascript">
  	document.write('Hello "Dave"');
-</script> 
+</script>
  ```
  为了使上述HTML字符串在SafeFrame API中正常被处理，必须重写格式如下：
- 
+
  ``` js
  var html = "<scr"+"ipt type=\'text\/javascript\'>";
  document.write('Hello \"Dave\"'); </scr"+"ipt>";
@@ -577,18 +576,18 @@ HTML文件应该包含以下内容：
  - 一个单一的，`SCRIPT`元素，放置在给定的`DIV`元素，其中包含上面第4节的逻辑。该`SCRIPT`可能来自第三方，或者可能定义成内联。
  例子：
  ``` html
- <html> 
-    <head> 
-    <style type="text/css"> 
-      BODY { margin:0px; padding:0px } 
-    </style> 
-    </head> 
-    <body scroll="no"> 
-        <div id="sf_align" style="position:absolute;top:0px;left:0px;" class="sf_el"> 
-       		<script type="text/javascript" src="../js/ext.js" class="sf_lib"></script> 
-        </div> 
-    </body> 
- </html> 
+ <html>
+    <head>
+    <style type="text/css">
+      BODY { margin:0px; padding:0px }
+    </style>
+    </head>
+    <body scroll="no">
+        <div id="sf_align" style="position:absolute;top:0px;left:0px;" class="sf_el">
+       		<script type="text/javascript" src="../js/ext.js" class="sf_lib"></script>
+        </div>
+    </body>
+ </html>
  ```
 
 ### 2.5 通信机制的细节
@@ -601,7 +600,7 @@ HTML文件应该包含以下内容：
 每当从容器收到信息，采取以下的步骤来确保它是被允许的：
  1. **二级域名/检查来源**
  从外部HTML内容发来的一个消息的原始域，应该与用于创建SafeFrame容器的`$sf.host.Config`类的`renderFile`字段中传递的URL的域相吻合。如果起源不吻合，消息就会被忽略。
- 2. 检查GUID 
+ 2. 检查GUID
  一个GUID被定义为，SafeFrame容器被渲染和应该与外部API传递的任何信息包含在一起的情况。当提供的GUID不存在或者未知时，则忽略该消息。
  3. 检查 HTML window对象的引用
  第三方对象的window引用源应该指向一个当SafeFrame被渲染时创建的iframe窗口引用。如果对象的窗口参考不匹配，已经呈现的任何已知的SafeFrame容器，则忽略该消息。
@@ -633,24 +632,24 @@ SafeFrame标签的高级别目标是封装第三方内容数据，以便主站�
 
 **例子：**
 ``` html
-<script type='text/x-safeframe' class='iab_sf_data'>     
-	{ 
-		id: "LREC", // ID of position object        
-		html: "<h1>Hello World</h1>", //3rd party HTML content 
-		conf:  
-		{ 
-			size: "300x250" //The size conf is required and denotes the  
-		} 
-	 	meta: //optional shared meta information  
-		{ 
-			rmx:  
-			 { 
-			 	sectionID: "14800347",  
-			 	siteID: "140509"   
-			 }  
-		}  
-	}  
-</script>  
+<script type='text/x-safeframe' class='iab_sf_data'>
+	{
+		id: "LREC", // ID of position object
+		html: "<h1>Hello World</h1>", //3rd party HTML content
+		conf:
+		{
+			size: "300x250" //The size conf is required and denotes the
+		}
+	 	meta: //optional shared meta information
+		{
+			rmx:
+			 {
+			 	sectionID: "14800347",
+			 	siteID: "140509"
+			 }
+		}
+	}
+</script>
 ```
 
  上述的`SCRIPT`标签被定义为这样的原因如下：
@@ -671,70 +670,70 @@ SafeFrame标签的高级别目标是封装第三方内容数据，以便主站�
 
 下面的例子提供了两个，加载SafeFrame host库和引导程序的SafeFrame的数据标签。
 ``` html
-<table>  
-	<tbody>  
-		<tr>  
-			<td valign='top'> 
-			<!-- SafeFrame Inline Tag 1 -->  
-			<div id='tgtLREC'>  
-				<script type='text/x-safeframe' class='iab_sf_data'> 
-				{  
-					id: "LREC",  
-					src:  
-					"http://extserver.com/data-tag",  
-					conf:  
-					{  
-						w: 300,  
-						h: 250,  
-						dest: "tgtLREC"  
-					},  
-					meta:  
-					{  
-						rmx:  
-						{  
-							sectionID: "14800347",  
-							siteID:  "140509"   
-						}  
-					}  
-				}  
-				</script>  
+<table>
+	<tbody>
+		<tr>
+			<td valign='top'>
+			<!-- SafeFrame Inline Tag 1 -->
+			<div id='tgtLREC'>
+				<script type='text/x-safeframe' class='iab_sf_data'>
+				{
+					id: "LREC",
+					src:
+					"http://extserver.com/data-tag",
+					conf:
+					{
+						w: 300,
+						h: 250,
+						dest: "tgtLREC"
+					},
+					meta:
+					{
+						rmx:
+						{
+							sectionID: "14800347",
+							siteID:  "140509"
+						}
+					}
+				}
+				</script>
 				<!-- b/c a "dest" tag exists (the overall div container) -->
-				<!-- container tags will be rendered here -->  
-				<!-- optional noscript section for fall back -->  
-				<noscript>  
-					<img src=  "http://ext.server.com/img.gif"  />  
-				</noscript>  
-			</div> 
-			</td>  
-			<td valign='top'>  
-			<!-- SafeFrame Inline Tag 2 -->  
-				<script type='text/x-safeframe' 
-				class='iab_sf_data'>  
-				{  
-					id: "LREC2",  
+				<!-- container tags will be rendered here -->
+				<!-- optional noscript section for fall back -->
+				<noscript>
+					<img src=  "http://ext.server.com/img.gif"  />
+				</noscript>
+			</div>
+			</td>
+			<td valign='top'>
+			<!-- SafeFrame Inline Tag 2 -->
+				<script type='text/x-safeframe'
+				class='iab_sf_data'>
+				{
+					id: "LREC2",
 					src: "http://externalserver.com/data-
-					tag",  
-					conf:  
-					{  
-						w: 300,  
-						h: 250  
-					}  
-				}  
-				</script>  
+					tag",
+					conf:
+					{
+						w: 300,
+						h: 250
+					}
+				}
+				</script>
 			<!-- b/c a "dest" tag exists (the overall div container) -->
-			<!-- container tags will be rendered here -->   
-			<!-- optional noscript section for fall back -->  
-				<noscript>  
-				<img src= "http://ext.server.com/img.gif" />  
-				</noscript>  
-			</td>  
-		</tr>  
-	</tbody>  
+			<!-- container tags will be rendered here -->
+			<!-- optional noscript section for fall back -->
+				<noscript>
+				<img src= "http://ext.server.com/img.gif" />
+				</noscript>
+			</td>
+		</tr>
+	</tbody>
 </table>
 ```
 ``` html
-<!-- SafeFrame Host library / API -->  
-<script type='text/javascript' src='sf-api-boot.js'></script>  
+<!-- SafeFrame Host library / API -->
+<script type='text/javascript' src='sf-api-boot.js'></script>
 <!-- script code in external file will automatically 'boot' and read data tags -->
 ```
 
@@ -744,178 +743,178 @@ SafeFrame标签的高级别目标是封装第三方内容数据，以便主站�
 下面的例子演示了这种情况可能是如何编码的。
 
 ``` html
-<html> 
-<head> 
+<html>
+<head>
 	<script type="text/javascript" src="http://cdn.example.org/v1/sf-host.js"></script>
-	<script type='text/javascript'>  
-	 
-	<!-- SafeFrame Host API configuration -->  
-	(function()  
-		{  
-		var pubAPI = $sf.hostpub, conf;   
-		function handle_start_pos_render(id)  
-		{   
-		 
-		}  
-		function handle_end_pos_render(id)  
-		{ 
-		}  
-		conf = new pubAPI.Config( 
-		{  
-			auto: true,  
-			cdn: "http://l.yimg.com",  
-			renderFile: "r.html",  
-			root: "/SafeFrame/v1/html",  
-			ver: "2-3-4",  
-			positions:  
-			{  
-			"LREC":  
-				{  
-				dest:  "tgtLREC",  
-				w: 300,  
-				h: 250  
-				}  
-			},  
-		onStartPosRender: 
-		handle_start_pos_render,  
-		onEndPosRender: handle_end_pos_render  
-		});   
-	})();  
-	</script>  
-</head>  
-<body>  
-	<div id='tgtLREC'>  
-	<script type='text/x-safeframe' class='sf_data'>  
-	{  
-	id: "LREC",  
-	src: 
-	"http://externalserver.com/data-tag",  
-	meta:  
-		{  
-		rmx:  
-			{  
-			sectionID: "14800347",  
-			siteID: "140509"   
-			}  
-		}  
-	}  
+	<script type='text/javascript'>
+
+	<!-- SafeFrame Host API configuration -->
+	(function()
+		{
+		var pubAPI = $sf.hostpub, conf;
+		function handle_start_pos_render(id)
+		{
+
+		}
+		function handle_end_pos_render(id)
+		{
+		}
+		conf = new pubAPI.Config(
+		{
+			auto: true,
+			cdn: "http://l.yimg.com",
+			renderFile: "r.html",
+			root: "/SafeFrame/v1/html",
+			ver: "2-3-4",
+			positions:
+			{
+			"LREC":
+				{
+				dest:  "tgtLREC",
+				w: 300,
+				h: 250
+				}
+			},
+		onStartPosRender:
+		handle_start_pos_render,
+		onEndPosRender: handle_end_pos_render
+		});
+	})();
 	</script>
-	 <!-- b/c a "dest" tag exists (the overall div 
-	container) container tags will be rendered here -->  
-	<noscript>  
-		<img src= "http://ext.server.com/img.gif"  
-		/>  
-	</noscript>  
-	</div>  
-	<script type='text/javascript'>  
-	$sf.host.boot();  
-	</script>  
-</body>  
-</html>  
+</head>
+<body>
+	<div id='tgtLREC'>
+	<script type='text/x-safeframe' class='sf_data'>
+	{
+	id: "LREC",
+	src:
+	"http://externalserver.com/data-tag",
+	meta:
+		{
+		rmx:
+			{
+			sectionID: "14800347",
+			siteID: "140509"
+			}
+		}
+	}
+	</script>
+	 <!-- b/c a "dest" tag exists (the overall div
+	container) container tags will be rendered here -->
+	<noscript>
+		<img src= "http://ext.server.com/img.gif"
+		/>
+	</noscript>
+	</div>
+	<script type='text/javascript'>
+	$sf.host.boot();
+	</script>
+</body>
+</html>
 ```
 
 #### 3.1.2.3 有兄弟标签的SafeFrame数据标签自动引导(SafeFrame Data Tag with Sibling Auto-Bootstrapping)
 
 在下面的例子中，每个提交的数据变量伴随着一个调用`$sf.host.boot`以在代码中加载列出的标签的二级标签。
 ``` html
-<table>  
-<tbody>  
-<tr>  
-<td valign='top'>  
-<!-- SafeFrame Inline Tag 1 -->  
-<div id='tgtLREC'>  
-	<script type='text/x-safeframe' 
-	class='sf_data'>  
-	{  
-	id: "LREC",  
-	src: 
+<table>
+<tbody>
+<tr>
+<td valign='top'>
+<!-- SafeFrame Inline Tag 1 -->
+<div id='tgtLREC'>
+	<script type='text/x-safeframe'
+	class='sf_data'>
+	{
+	id: "LREC",
+	src:
 	"http://externalserver.com/da
-	ta-tag",  
-	conf:  
-		{  
-		w: 300,  
-		h: 250,  
-		dest: "tgtLREC"  
-		},  
-	meta:  
-		{  
-		rmx:  
-		{  
-			sectionID: 
-			"14800347",  
-			siteID: "140509"   
-		}  
-		}  
-	}  
-	</script>  
-	<!-- b/c a "dest" tag exists (the overall 
-	div container) container tags will be 
-	rendered here -->  
-	<!-- optional noscript section for fall 
-	back -->  
-	<noscript>  
-		<img src= "http://ext.server.com/img.gif" />   
-	</noscript>  
-	<script type='text/javascript'>  
-	(function() {  
-		var w = window, s = w["$sf"], 
-		b = s && s.boot;  
-		if (!s) s = w["$sf"] = {};  
-		if (b && typeof b == 
-		"function") {  
-		try { b(); } catch (e) 
-		{ }  
-		} else {  
+	ta-tag",
+	conf:
+		{
+		w: 300,
+		h: 250,
+		dest: "tgtLREC"
+		},
+	meta:
+		{
+		rmx:
+		{
+			sectionID:
+			"14800347",
+			siteID: "140509"
+		}
+		}
+	}
+	</script>
+	<!-- b/c a "dest" tag exists (the overall
+	div container) container tags will be
+	rendered here -->
+	<!-- optional noscript section for fall
+	back -->
+	<noscript>
+		<img src= "http://ext.server.com/img.gif" />
+	</noscript>
+	<script type='text/javascript'>
+	(function() {
+		var w = window, s = w["$sf"],
+		b = s && s.boot;
+		if (!s) s = w["$sf"] = {};
+		if (b && typeof b ==
+		"function") {
+		try { b(); } catch (e)
+		{ }
+		} else {
 		document.write("<scr","ipt type='text/javascript' src='sf-host.js'></scr","ipt>")
-		;  
-		}  
-	})();  
-	</script>  
-	<!-- Above script code will only load in 
-	host library one time, call boot for each 
-	tag -->  
-</div>  
-</td>  
-<td valign='top'>  
-	<!-- SafeFrame Inline Tag 2 -->  
-	<script type='text/x-safeframe' 
-	class='sf_data'>  
-	{  
-	id: "LREC2",  
-	src: 
-	"http://externalserver.com/data-tag",  
-	conf:  
-	{  
-		w: 300,  
-		h: 250  
-	}  
-	}  
-	</script>  
-	<!-- b/c a "dest" tag exists (the overall div 
-	container) container tags will be rendered here 
-	-->  
-	<!-- optional noscript section for fall back -->  
-	<noscript>  
-	<img src= "http://ext.server.com/img.gif" />  
-	</noscript>  
-	<script type='text/javascript'>  
-	(function() {  
-		var w = window, s = w["$sf"], 
-		b = s && s.boot;  
-		if (!s) s = w["$sf"] = {};  
-		if (b && typeof b == "function") {   
-		try { b(); } catch (e) 
-		{ }  
-		} else {  
-		document.write("<scr","ipt type='text/javascript' src='sf-host.js'></scr","ipt>");  
-		}  
-	})();  
-	</script> 
-	<!-- Above script code will only load in host library one time, call boot for each tag -->  
-</td>  
-</tr>  
-</tbody>  
-</table> 
+		;
+		}
+	})();
+	</script>
+	<!-- Above script code will only load in
+	host library one time, call boot for each
+	tag -->
+</div>
+</td>
+<td valign='top'>
+	<!-- SafeFrame Inline Tag 2 -->
+	<script type='text/x-safeframe'
+	class='sf_data'>
+	{
+	id: "LREC2",
+	src:
+	"http://externalserver.com/data-tag",
+	conf:
+	{
+		w: 300,
+		h: 250
+	}
+	}
+	</script>
+	<!-- b/c a "dest" tag exists (the overall div
+	container) container tags will be rendered here
+	-->
+	<!-- optional noscript section for fall back -->
+	<noscript>
+	<img src= "http://ext.server.com/img.gif" />
+	</noscript>
+	<script type='text/javascript'>
+	(function() {
+		var w = window, s = w["$sf"],
+		b = s && s.boot;
+		if (!s) s = w["$sf"] = {};
+		if (b && typeof b == "function") {
+		try { b(); } catch (e)
+		{ }
+		} else {
+		document.write("<scr","ipt type='text/javascript' src='sf-host.js'></scr","ipt>");
+		}
+	})();
+	</script>
+	<!-- Above script code will only load in host library one time, call boot for each tag -->
+</td>
+</tr>
+</tbody>
+</table>
 ```
 
 ## 4. 主站API实施细则
@@ -935,65 +934,65 @@ SafeFrame主站API使用第4.1节至第4.11节到定义的的命名空间，函�
 
 **例子1**
 ``` html
-<script type='text/javascript'>    
- 
-//JavaScript inline host config, used mainly for SafeFrame tags which want to auto boot the SafeFrame host API and render 3rd party content.    
- 
-var w = window, sf = w["$sf"], pub = sf && sf.host;   
-if (!sf) sf = w["$sf"] = {};  
-if (!pub) pub = sf.host = {};   
- 
-host.conf  =  
-{  
-	debug:    true,  
-	ver:    "2-3-4",  
-	positions:  
-{  
-	LREC:  
-	{  
-		id:   "LREC",  
-		dest:  "tgtLREC",  
-		tgt:  "_self",  
-		w:  300,  
-		h:  250    
-	}  
-}  
-};      
- 
-//Assuming a SafeFrame tag is placed below this configuration, it will read the config defined and use those values as the logic for the tag.  
+<script type='text/javascript'>
+
+//JavaScript inline host config, used mainly for SafeFrame tags which want to auto boot the SafeFrame host API and render 3rd party content.
+
+var w = window, sf = w["$sf"], pub = sf && sf.host;
+if (!sf) sf = w["$sf"] = {};
+if (!pub) pub = sf.host = {};
+
+host.conf  =
+{
+	debug:    true,
+	ver:    "2-3-4",
+	positions:
+{
+	LREC:
+	{
+		id:   "LREC",
+		dest:  "tgtLREC",
+		tgt:  "_self",
+		w:  300,
+		h:  250
+	}
+}
+};
+
+//Assuming a SafeFrame tag is placed below this configuration, it will read the config defined and use those values as the logic for the tag.
 </script>
 ```
 
 **例子2**
 ``` html
-<!-- SafeFrame Inline Tag -->   
-<div id="tgtLREC">  
-<script type='text/x-safeframe' class='sf_data'>  
-{  
-id:    "LREC",  
-src:"http://ext.server.com/sf",   
-conf:  
-{  
-	dest:  "tgtLREC",  
-	size:  "300x250"  
-},   
- 
-meta:  
-{    
-	rmx:  
-	{  
-		sectionID:  "14800347",  
-		siteID:  "140509"   
-	}  
-}    
-}    
-</script>  
-<script type='text/javascript'>  
-try {  
-	$sf.host.boot();  
-} catch (e) {  }  
-</script>  
-</div> 
+<!-- SafeFrame Inline Tag -->
+<div id="tgtLREC">
+<script type='text/x-safeframe' class='sf_data'>
+{
+id:    "LREC",
+src:"http://ext.server.com/sf",
+conf:
+{
+	dest:  "tgtLREC",
+	size:  "300x250"
+},
+
+meta:
+{
+	rmx:
+	{
+		sectionID:  "14800347",
+		siteID:  "140509"
+	}
+}
+}
+</script>
+<script type='text/javascript'>
+try {
+	$sf.host.boot();
+} catch (e) {  }
+</script>
+</div>
 ```
 
 ### 4.3 命名空间`$sf.info `
@@ -1008,89 +1007,89 @@ try {
 
 **例子**
 ``` html
-<div id='tgtLREC'></div>  
-<script type='text/javascript'>   
- 
-(function() {   
- 
-	var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub 
-	&& host.Config,    
-	 
-	CONF_CDN   = "http://l.yimg.com",  
-	CONF_ROOT   = "/sf",  
-	CONF_VER  = "2-3-4",  
-	CONF_RFILE  = "/html/render.html",  
-	CONF_TO  = 30;   
-	 
-	function on_endposrender(posID, success)  
-	{  
-	//a render action success  
-	}   
-	 
-	function on_posmsg(posID, msg, data)  
-	{  
-	//listen for messages 
-	}  
-	 
-	w.render_content  = function()  
-	{  
-	var conf, posConf, pos,confDesc;   
-	 
-	if (Config) {  
-	conf = Config();  
-	if (!conf) {  
-	confDesc  =  
-	{  
-	debug:       true,  
-	cdn:        CONF_CDN,  
-	root:       CONF_ROOT,    
-	ver:        CONF_VER,  
-	renderFile:      CONF_RFILE,   
-	to:        CONF_TO  
-	onEndPosRender:    on_endposrender,  
-	onPosMsg:      on_posmsg  
-	};  
-	conf = new Config(confDesc);  
-	}  
-	if (conf) {  
-	posConf = new host.PosConfig("LREC","tgtLREC");  
-	posConf.w  = 300;  
-	posConf.h  = 250;  
-	posConf.z  = 1000;  
-	pos    = new host.Position("LREC","<h1>Hello World I'm an Ad<h1>",null,posConf);  
-	host.render(pos);  
-	}  
-	}  
-	}   
-	w.remove_content  = function()  
-	{  
-	var skipID = "LREC",  // we want to skip the LREC position, 
-	and leave it in the page  
-	list   = $sf.info.list,  
-	cnt     = list.length,  
-	to_rem = [],  
-	idx     = 0,  
-	pos;   
-	while (cnt--)  
-	{  
-	pos = list[idx++];  //$sf.host.Position  
-	if (pos.id == skipID) continue;  
-	to_rem.push(pos.id);  
-	}  
-	$host.nuke(to_rem); } //remove all but the LREC position; 
-})();  
+<div id='tgtLREC'></div>
+<script type='text/javascript'>
+
+(function() {
+
+	var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub
+	&& host.Config,
+
+	CONF_CDN   = "http://l.yimg.com",
+	CONF_ROOT   = "/sf",
+	CONF_VER  = "2-3-4",
+	CONF_RFILE  = "/html/render.html",
+	CONF_TO  = 30;
+
+	function on_endposrender(posID, success)
+	{
+	//a render action success
+	}
+
+	function on_posmsg(posID, msg, data)
+	{
+	//listen for messages
+	}
+
+	w.render_content  = function()
+	{
+	var conf, posConf, pos,confDesc;
+
+	if (Config) {
+	conf = Config();
+	if (!conf) {
+	confDesc  =
+	{
+	debug:       true,
+	cdn:        CONF_CDN,
+	root:       CONF_ROOT,
+	ver:        CONF_VER,
+	renderFile:      CONF_RFILE,
+	to:        CONF_TO
+	onEndPosRender:    on_endposrender,
+	onPosMsg:      on_posmsg
+	};
+	conf = new Config(confDesc);
+	}
+	if (conf) {
+	posConf = new host.PosConfig("LREC","tgtLREC");
+	posConf.w  = 300;
+	posConf.h  = 250;
+	posConf.z  = 1000;
+	pos    = new host.Position("LREC","<h1>Hello World I'm an Ad<h1>",null,posConf);
+	host.render(pos);
+	}
+	}
+	}
+	w.remove_content  = function()
+	{
+	var skipID = "LREC",  // we want to skip the LREC position,
+	and leave it in the page
+	list   = $sf.info.list,
+	cnt     = list.length,
+	to_rem = [],
+	idx     = 0,
+	pos;
+	while (cnt--)
+	{
+	pos = list[idx++];  //$sf.host.Position
+	if (pos.id == skipID) continue;
+	to_rem.push(pos.id);
+	}
+	$host.nuke(to_rem); } //remove all but the LREC position;
+})();
 </script>
 </div>
 ```
 
-### 4.4 类`$sf.host.Config` 
+### 4.4 类`$sf.host.Config`
 `$sf.host.Config(conf) `
 主站配置类是用来描述了SafeFrame 主站API的配置选项的。该类配置主站使用的整体功能和设置。
 
 >  **主站实现注意事项**
 >  主站类`$sf.host.Config`只应在的SafeFrame主站API中存在一次，并应在SafeFrame容器处于非活动状态的时候被构造来启动配置选项。
 > 当构建时，如果不是先前定义的话，详细信息将写入内嵌`$sf.host.conf`命名空间中。
-> 
+>
 
 如果没有指定初始参数，则返回现有配置。如果返回值为null，则不存在有效的配置。
 
@@ -1098,152 +1097,152 @@ try {
 **参数**
 
  - `{Object} conf`
- A list of key value pairs to use for the configuration. 
+ A list of key value pairs to use for the configuration.
 
 **字段**
 以下字段可以在`conf`参数中返回：
 
  - `{String}` **conf.cdn**
- Host of the CDN used to fetch SafeFrame resources. This value should always be a different domain than your web page 
+ Host of the CDN used to fetch SafeFrame resources. This value should always be a different domain than your web page
  　Sample value: `"http://l.yimg.com"`
  - `{String}` **conf.ver**
- The version number of the SafeFrame to be used, provided in the format [number]-[number]-[number]. 
+ The version number of the SafeFrame to be used, provided in the format [number]-[number]-[number].
  　Sample value: `"2-3-4"
  - `{String}` **conf.renderFile**
- The partial path and filename of the file from the cdn property that is used as the base document for external party content to be rendered using the SafeFrame. 
- - `{String}` **conf.hostFile** 
- The URL string to the Host-side JavaScript file to be used. 
+ The partial path and filename of the file from the cdn property that is used as the base document for external party content to be rendered using the SafeFrame.
+ - `{String}` **conf.hostFile**
+ The URL string to the Host-side JavaScript file to be used.
  - `{String}` **extFile**
- The URL string to the External Party-side JavaScript file to be used. 
+ The URL string to the External Party-side JavaScript file to be used.
  - `{String}` **bootFile**
- The URL string to the External Party-side JaveScript file to be used for bootstrapping the SafeFrames library, processing SafeFrames tags, and rendering content. 
- - `{Number}` **conf.to** 
- The maximum amount of time (in seconds) that a render process can take before the operation can be aborted. 
- Rendering the external party content in a SafeFrame container is an asynchronous process, which is done by rendering an x-domain iframe tag. This number defines the maximum amount of time that the render operation can spend in the "loading" state before a time-out error is generated. 
-　 Sample value: `30` 
- - `{Object}` **conf.positions** 
- An object defining literal representations of `$sf.host.PosConfig` objects, keyed by id, to be used to configure each position in the page  
+ The URL string to the External Party-side JaveScript file to be used for bootstrapping the SafeFrames library, processing SafeFrames tags, and rendering content.
+ - `{Number}` **conf.to**
+ The maximum amount of time (in seconds) that a render process can take before the operation can be aborted.
+ Rendering the external party content in a SafeFrame container is an asynchronous process, which is done by rendering an x-domain iframe tag. This number defines the maximum amount of time that the render operation can spend in the "loading" state before a time-out error is generated.
+　 Sample value: `30`
+ - `{Object}` **conf.positions**
+ An object defining literal representations of `$sf.host.PosConfig` objects, keyed by id, to be used to configure each position in the page
  - `{Boolean}` **conf.auto** *(Optional)*
- Whether or not automatic bootstrapping and rendering of SafeFrame tags should occur. Default is true. If set to false, SafeFrame tags will just add to the `$sf.info object`. 
+ Whether or not automatic bootstrapping and rendering of SafeFrame tags should occur. Default is true. If set to false, SafeFrame tags will just add to the `$sf.info object`.
  - `{String}` **conf.msgFile** *(Optional)*
- The partial path and filename of the file from the cdn property that is used to as a proxy for x-domain communication. Only required for older browsers that do not support HTML 5. 
+ The partial path and filename of the file from the cdn property that is used to as a proxy for x-domain communication. Only required for older browsers that do not support HTML 5.
  - `{Boolean}` conf.debug** *(Optional)*
- Whether or not to run the SDK in debug mode, which will also use un-minified JS code, separated files, etc. 
+ Whether or not to run the SDK in debug mode, which will also use un-minified JS code, separated files, etc.
 
 **事件**
 
- - `onBeforePosMsg(id, msgName, data)` 
- A function that gets called each time a position sends a request for some functionality. Returning true cancels the command request. 
+ - `onBeforePosMsg(id, msgName, data)`
+ A function that gets called each time a position sends a request for some functionality. Returning true cancels the command request.
  **参数: **
  　`{String}` **id**
- 　The id of the position that has started its render process 
- 　`{String}` **msgName** 
- 　The type of message being sent 
- 　`{String}` **data** *(Optional)* 
- 　Data that gets passed through 
- - `onEndPosRender(id)` 
- A  function which gets called each time a position has finished rendering  
- **参数: **
- 　`{String}` **id**
-　 The id of the position that has started its render process 
- - `onFailure(id)` 
- A  function which gets called anytime a render call has failed or timed out 
- **参数: **
-　 `{String}` **id** 
-　 The id of the position that has started its render process 
- - `onPosMsg(id, msgName, data)` 
- A callback function which gets called each time a position sends a message up to your web page 
- **参数: **
-　 `{String}` **id**
-　 The id of the position that has started its render process 
-　 `{String}` **msgName** 
- 　The name / type of message being sent 
+ 　The id of the position that has started its render process
+ 　`{String}` **msgName**
+ 　The type of message being sent
  　`{String}` **data** *(Optional)*
- 　Data that gets passed through 
- - `onStartPosRender(id)`
- A callback function which gets called each time a position is about to be rendered 
+ 　Data that gets passed through
+ - `onEndPosRender(id)`
+ A  function which gets called each time a position has finished rendering
+ **参数: **
+ 　`{String}` **id**
+　 The id of the position that has started its render process
+ - `onFailure(id)`
+ A  function which gets called anytime a render call has failed or timed out
  **参数: **
 　 `{String}` **id**
- 　The id of the position that has started its render process 
+　 The id of the position that has started its render process
+ - `onPosMsg(id, msgName, data)`
+ A callback function which gets called each time a position sends a message up to your web page
+ **参数: **
+　 `{String}` **id**
+　 The id of the position that has started its render process
+　 `{String}` **msgName**
+ 　The name / type of message being sent
+ 　`{String}` **data** *(Optional)*
+ 　Data that gets passed through
+ - `onStartPosRender(id)`
+ A callback function which gets called each time a position is about to be rendered
+ **参数: **
+　 `{String}` **id**
+ 　The id of the position that has started its render process
  - `onSuccess(id) `
- A callback function which gets called anytime a render call has successfully completed. 
+ A callback function which gets called anytime a render call has successfully completed.
  **参数: **
  　`{String}` **id**
 　 The id of the position that has started its render process
 
-**相关章节**: 
+**相关章节**:
 
  - 4.2 命名空间 `$sf.host.conf `
- - 4.5 类 `$sf.host.PosConfig` 
+ - 4.5 类 `$sf.host.PosConfig`
 
 **例子**
 ``` html
-<div id='tgtLREC'></div>  
-<script type='text/javascript'>  
- 
-(function() {     
-	var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub 
-	&& host.Config,    
-	 
-	CONF_CDN   = "http://l.yimg.com",    
-	CONF_ROOT   = "/sf",    
-	CONF_VER  = "2-3-4",    
-	CONF_RFILE  = "/html/render.html",    
-	CONF_TO    = 30;     
-	 
-	function on_endposrender(posID, success)    
-	{      
-	//a render action success    
-	}     
-	 
-	function on_posmsg(posID, msg, data)    
-	{        
-	//listen for messages    
-	}     
-	 
-	w.init_SafeFrame  = function()    
-	 
-	{        
-	var conf, confDesc;       
-	 
-	if (Config) {        
-		conf = Config();       
-		if (!conf) {          
-			confDesc  =          
-			{            
-				debug:       true, 
-				cdn:        CONF_CDN,  
-				root:       CONF_ROOT,  
-				ver:        CONF_VER,  
-				renderFile:      CONF_RFILE,  
-				to:        CONF_TO  
-				onEndPosRender:    on_endposrender,  
-				onPosMsg:      on_posmsg,  
-				positions:            
-				{  
-					"LREC":  
-					{  
-					id:    "LREC",  
-					w:    300,  
-					h:    250,  
-					z:    1000,  
-					dest:  "tgtLREC"  
-					}  
-				}  
-			};  
-			conf = new Config(confDesc);  
-			if (conf) {  
-				alert("SafeFrame Host Config successful");  
-			}  
-		}  
-	}    
-	}   
-})();  
+<div id='tgtLREC'></div>
+<script type='text/javascript'>
+
+(function() {
+	var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub
+	&& host.Config,
+
+	CONF_CDN   = "http://l.yimg.com",
+	CONF_ROOT   = "/sf",
+	CONF_VER  = "2-3-4",
+	CONF_RFILE  = "/html/render.html",
+	CONF_TO    = 30;
+
+	function on_endposrender(posID, success)
+	{
+	//a render action success
+	}
+
+	function on_posmsg(posID, msg, data)
+	{
+	//listen for messages
+	}
+
+	w.init_SafeFrame  = function()
+
+	{
+	var conf, confDesc;
+
+	if (Config) {
+		conf = Config();
+		if (!conf) {
+			confDesc  =
+			{
+				debug:       true,
+				cdn:        CONF_CDN,
+				root:       CONF_ROOT,
+				ver:        CONF_VER,
+				renderFile:      CONF_RFILE,
+				to:        CONF_TO
+				onEndPosRender:    on_endposrender,
+				onPosMsg:      on_posmsg,
+				positions:
+				{
+					"LREC":
+					{
+					id:    "LREC",
+					w:    300,
+					h:    250,
+					z:    1000,
+					dest:  "tgtLREC"
+					}
+				}
+			};
+			conf = new Config(confDesc);
+			if (conf) {
+				alert("SafeFrame Host Config successful");
+			}
+		}
+	}
+	}
+})();
 </script>
 </div>
 ```
 
-### 4.5 类`$sf.host.PosConfig` 
+### 4.5 类`$sf.host.PosConfig`
 **$sf.host.PosConfig**`(posIDorObj, destID, baseConf) `
 
 该类描述了一个`$sf.host.Position`对象应该如何被渲染。每个唯一ID只能有一个`PosConfig`对象可以存在。如果多于一个`PosConfig`对象由相同的ID建造，原来的PosConfig的初始值将被覆盖。主站主机仍然可以支持具有相同特征的多个广告位（即两个唯一的LREC）;他们只是需要有不同的ID（即LREC1和LREC2）
@@ -1253,39 +1252,39 @@ try {
 **参数：**
 
  - `{String|Object}` **posIDorObj**
- If this value is provided as a string, then it is used as the id property of the instance. If the value is returned as an object, then it is a descriptor that populates the properties of the instance. 
+ If this value is provided as a string, then it is used as the id property of the instance. If the value is returned as an object, then it is a descriptor that populates the properties of the instance.
  - `{String}` **destID**
- The HTML element ID attribute string into which the content is to be rendered. 
+ The HTML element ID attribute string into which the content is to be rendered.
  - `{Object}` **baseConf**,*(Optional)*
- An optional object that defines a representation of an `$sf.host.Config` object and is used in cases where no initial Host configuration was pre-defined. This option enables a shortcut for automatic host configuration if necessary and is usually used in conjunction with SafeFrame tags. If specified when a Host configuration already exists, this parameter is ignored. 
+ An optional object that defines a representation of an `$sf.host.Config` object and is used in cases where no initial Host configuration was pre-defined. This option enables a shortcut for automatic host configuration if necessary and is usually used in conjunction with SafeFrame tags. If specified when a Host configuration already exists, this parameter is ignored.
 
 **字段**
 
  - `bg`
- The background color to be used inside the safe frame. Default value is "transparent". 
+ The background color to be used inside the safe frame. Default value is "transparent".
  - `css`
- Style-sheet text or a URI to a CSS file that defines additional CSS to be used inside the SafeFrame iframe. Default value is "". 
- - `dest` 
- The HTML element ID into which the content is to be rendered. 
- - `H` 
- The height (in pixels) of the SafeFrame iframe to be created for the content specified.  
- - `id` 
- A unique identifier for the position or content. Used to link the `$sf.host.Position` object with a configuration. Specifying the id as "DEFAULT" means that this configuration will be used as the default values for other `$sf.Position` objects created. 
- - `size` 
- A string representing the width and height (in pixels) of the safe frame to be created for the content specified. Setting this value also sets the w and h properties respectively Example: `"300x250"` 
- - `tgt` 
- The target window name for where hyperlink clicks should be routed to unless otherwise specified. Default value is "_blank". If a URL is provided, it opens in a new window. The values "_self" and "_parent" are NOT allowed and if provided the value "_top" is used instead. 
- - `w` 
- The width (in pixels) of the SafeFrame iframe to be created for the content specified. 
- - `z`  
- The z-index value to be used for the SafeFrame iframe. 
- - `supports` 
- An object identifying the features that the host supports relative to the content specified.  
+ Style-sheet text or a URI to a CSS file that defines additional CSS to be used inside the SafeFrame iframe. Default value is "".
+ - `dest`
+ The HTML element ID into which the content is to be rendered.
+ - `H`
+ The height (in pixels) of the SafeFrame iframe to be created for the content specified.
+ - `id`
+ A unique identifier for the position or content. Used to link the `$sf.host.Position` object with a configuration. Specifying the id as "DEFAULT" means that this configuration will be used as the default values for other `$sf.Position` objects created.
+ - `size`
+ A string representing the width and height (in pixels) of the safe frame to be created for the content specified. Setting this value also sets the w and h properties respectively Example: `"300x250"`
+ - `tgt`
+ The target window name for where hyperlink clicks should be routed to unless otherwise specified. Default value is "_blank". If a URL is provided, it opens in a new window. The values "_self" and "_parent" are NOT allowed and if provided the value "_top" is used instead.
+ - `w`
+ The width (in pixels) of the SafeFrame iframe to be created for the content specified.
+ - `z`
+ The z-index value to be used for the SafeFrame iframe.
+ - `supports`
+ An object identifying the features that the host supports relative to the content specified.
 
 **方法**
 
- - `toString()` 
- A method that serializes the position into a string using query-string encoded syntax. 
+ - `toString()`
+ A method that serializes the position into a string using query-string encoded syntax.
 
 **例子**
  `//See $sf.host.Config example`
@@ -1298,139 +1297,139 @@ try {
 **参数**
 
  - `{String|Object}` **posIDorObj**
- REQUIRED, if is a string, used as the id property of the instance. If is an object, it is used as a descriptor to fill out the properties of the instance. 
+ REQUIRED, if is a string, used as the id property of the instance. If is an object, it is used as a descriptor to fill out the properties of the instance.
  - `{String}` **html**
- REQUIRED, the string content to be rendered into the safe frame described by this instance 
- - `{Object}` **meta Optional** 
- An object with key/value pairs defining customizable metadata about the position 
- - `{Object}` **config Optional** 
- An object representing position config overrides 
+ REQUIRED, the string content to be rendered into the safe frame described by this instance
+ - `{Object}` **meta Optional**
+ An object with key/value pairs defining customizable metadata about the position
+ - `{Object}` **config Optional**
+ An object representing position config overrides
 
 **字段**
 
- - `{Object}` **config** 
- Config information defines how SafeFrame renders a position. This object can override values already set in the associated config. 
- - `{String}` **html** 
- The HTML content to be rendered inside the safe frame, or a URL to HTML content returned that is returned using a SCRIPT tag. 
+ - `{Object}` **config**
+ Config information defines how SafeFrame renders a position. This object can override values already set in the associated config.
+ - `{String}` **html**
+ The HTML content to be rendered inside the safe frame, or a URL to HTML content returned that is returned using a SCRIPT tag.
  - `{String}` **id**
- A unique identifier for the position. If present, this value is used to lookup a 
-`$sf.host.PosConfig` object. 
- - `{Object}` **meta** 
- Metadata information in the form of an object of any number, combination key, or value pairs to store host or content-related metadata. 
- - `{String}` **src** 
- A URI to be used as a SCRIPT tag that renders the contents in the SafeFrame. Setting this value changes the value of the HTML property and is used mostly for short-hand purposes.  
- The purpose of this field is to enable content to be fetched when the HTML content is no readily available. Setting this property creates an HTTP request for content to the URI specified. Because the URI provided is in a SCRIPT context, content must be returned in JavaScript form. This process prevents the creation of other iframes that would otherwise damage the system because content within any created iframes is denied access to the external content API. 
+ A unique identifier for the position. If present, this value is used to lookup a
+`$sf.host.PosConfig` object.
+ - `{Object}` **meta**
+ Metadata information in the form of an object of any number, combination key, or value pairs to store host or content-related metadata.
+ - `{String}` **src**
+ A URI to be used as a SCRIPT tag that renders the contents in the SafeFrame. Setting this value changes the value of the HTML property and is used mostly for short-hand purposes.
+ The purpose of this field is to enable content to be fetched when the HTML content is no readily available. Setting this property creates an HTTP request for content to the URI specified. Because the URI provided is in a SCRIPT context, content must be returned in JavaScript form. This process prevents the creation of other iframes that would otherwise damage the system because content within any created iframes is denied access to the external content API.
  The URI provided may contain MACRO place holders that SafeFrame will populate. This feature can be used to gather information from a Web browser that can be passed in the HTTP request and is useful for cases when retrieved content requires information about the Web browser environment only available to the host.
- SafeFrame populates the following values: 
+ SafeFrame populates the following values:
 
- 　- `{String} ${sf_ver}`  
- 　The string representation of the current version of SafeFrame 
+ 　- `{String} ${sf_ver}`
+ 　The string representation of the current version of SafeFrame
 　- `{Number} ${ck_on}`
- 　Indicates whether cookies are enabled on the browser: 1 for true, 0 for false. 
-　- `{String} ${flash_ver}`  
+ 　Indicates whether cookies are enabled on the browser: 1 for true, 0 for false.
+　- `{String} ${flash_ver}`
  　Identifies which version of Flash is enabled in the browser. If Flash is not detected, the value is set to 0.
 
 **例子**
 ``` javascript
-function define_content() 
-{ 
-var pub = $sf.host, PosConfig = host.PosConfig, PosMeta = host.PosMeta, 
-Pos = host.Position, pos, posConf, posMeta; 
- 
-  posConf   = new PosConfig("LREC", "tgtLREC"); 
-  posConf.w   = 300; 
-  posConf.h  = 250; 
-  posConf.z  = 1000; 
- 
-posMeta    = new PosMeta({"context":"Music"}); 
- 
-  //a shared meta object will now contain 
-  //  context:   "Music" 
-  //  sf_ver:   "1-0-1", 
-  //  flash_ver:  11 
- 
-  pos     = new Pos("LREC", 
-"http://getsomeads.com?pos=LREC&f=${flash_ver}&sf=${sf_ver}", posMeta, 
-posConf); 
-  //note that the ${flash_ver} and ${sf_ver} macros will get filled out 
-automatically 
-  // 
-  //so if flash 11 is installed, and we are using SafeFrame version 1 
-  //the URI for the script tag created will be 
-  // 
-  // "http://getsomeads.com?pos=LREC&f=11&sf=1-0-1" 
- 
+function define_content()
+{
+var pub = $sf.host, PosConfig = host.PosConfig, PosMeta = host.PosMeta,
+Pos = host.Position, pos, posConf, posMeta;
+
+  posConf   = new PosConfig("LREC", "tgtLREC");
+  posConf.w   = 300;
+  posConf.h  = 250;
+  posConf.z  = 1000;
+
+posMeta    = new PosMeta({"context":"Music"});
+
+  //a shared meta object will now contain
+  //  context:   "Music"
+  //  sf_ver:   "1-0-1",
+  //  flash_ver:  11
+
+  pos     = new Pos("LREC",
+"http://getsomeads.com?pos=LREC&f=${flash_ver}&sf=${sf_ver}", posMeta,
+posConf);
+  //note that the ${flash_ver} and ${sf_ver} macros will get filled out
+automatically
+  //
+  //so if flash 11 is installed, and we are using SafeFrame version 1
+  //the URI for the script tag created will be
+  //
+  // "http://getsomeads.com?pos=LREC&f=11&sf=1-0-1"
+
   host.render(pos);
 ```
 **方法**
 
- - `toString()` 
- A method that serializes the position into a string using query-string encoded syntax 
+ - `toString()`
+ A method that serializes the position into a string using query-string encoded syntax
 
 **例子**
 ``` html
-<div id='tgtLREC'></div>  
-<script type='text/javascript'>   
- 
-(function() {  
- 
-	var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub 
-	&& host.Config,   
-	 
-	CONF_CDN   = "http://l.yimg.com",  
-	CONF_ROOT   = "/sf",  
-	CONF_VER  = "2-3-4",  
-	CONF_RFILE  = "/html/render.html",  
-	CONF_TO    = 30;   
-	 
-	function on_endposrender(posID, success)  
-	{  
-	//a render action success  
-	}   
-	 
-	function on_posmsg(posID, msg, data)  
-	{  
-	 //listen for messages  
-	}     
-	 
-	w.init_render  = function() 
-	{  
-	 var conf, confDesc, posConf, pos;      
-	 
-	if (Config) {  
-		conf = Config();  
-		if (!conf) {  
-			confDesc  =  
-			{          
-				debug:       true,  
-				cdn:        CONF_CDN,  
-				root:       CONF_ROOT,  
-				ver:        CONF_VER,  
-				renderFile:      CONF_RFILE,  
-				to:        CONF_TO  
-				onEndPosRender:    on_endposrender,  
-				onPosMsg:      on_posmsg  
-			};          
-			conf = new Config(confDesc);  
-			if (conf) {  
-				posConf    = new 
-				host.PosConfig("LREC","tgtLREC");  
-				posConf.w  = 300;  
-				posConf.h  = 250;  
-				posConf.z  = 1000;    
-				pos    = new 
-				host.Position("LREC","<h1>Hello World, I'm an Ad</h1>");  
-				//note that b/c you constructed a 
-				PosConfig object already with an id of 
-				"LREC", the configuration will be 
-				grabbed   
-				 
-				host.render(pos);  
-			}        
-		}      
-	}    
-	}   
-})();  
+<div id='tgtLREC'></div>
+<script type='text/javascript'>
+
+(function() {
+
+	var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub
+	&& host.Config,
+
+	CONF_CDN   = "http://l.yimg.com",
+	CONF_ROOT   = "/sf",
+	CONF_VER  = "2-3-4",
+	CONF_RFILE  = "/html/render.html",
+	CONF_TO    = 30;
+
+	function on_endposrender(posID, success)
+	{
+	//a render action success
+	}
+
+	function on_posmsg(posID, msg, data)
+	{
+	 //listen for messages
+	}
+
+	w.init_render  = function()
+	{
+	 var conf, confDesc, posConf, pos;
+
+	if (Config) {
+		conf = Config();
+		if (!conf) {
+			confDesc  =
+			{
+				debug:       true,
+				cdn:        CONF_CDN,
+				root:       CONF_ROOT,
+				ver:        CONF_VER,
+				renderFile:      CONF_RFILE,
+				to:        CONF_TO
+				onEndPosRender:    on_endposrender,
+				onPosMsg:      on_posmsg
+			};
+			conf = new Config(confDesc);
+			if (conf) {
+				posConf    = new
+				host.PosConfig("LREC","tgtLREC");
+				posConf.w  = 300;
+				posConf.h  = 250;
+				posConf.z  = 1000;
+				pos    = new
+				host.Position("LREC","<h1>Hello World, I'm an Ad</h1>");
+				//note that b/c you constructed a
+				PosConfig object already with an id of
+				"LREC", the configuration will be
+				grabbed
+
+				host.render(pos);
+			}
+		}
+	}
+	}
+})();
 </script>
 ```
 
@@ -1444,126 +1443,126 @@ automatically
 
 每当`$sf.host.PosMeta`对象被创建了，以下信息会总是默认在"共享"部分中出现。
 
- - `{String} sf_ver`  
- The string representation of the current version of SafeFrame 
- - `{Number} ck_on`  
- Identified whether cookies are enabled on the browser: 1 for true, 0 for false. 
- - `{String} flash_ver`  
- Identifies which version of Flash is enabled in the browser. If Flash is not detected, the value is set to 0. 
+ - `{String} sf_ver`
+ The string representation of the current version of SafeFrame
+ - `{Number} ck_on`
+ Identified whether cookies are enabled on the browser: 1 for true, 0 for false.
+ - `{String} flash_ver`
+ Identifies which version of Flash is enabled in the browser. If Flash is not detected, the value is set to 0.
 
  我们也看看`$sf.host.Position`的"src"属性。当`PosMeta`对象被构造，并可以为了作为宏观字段的"src"属性在URL上自动被传递，上述的值被定义。
 
 **参数：**
 
  - `{Object}` **shared_obj** *(Optional)*
- An object containing key /value pairs for shared metadata 
- - `{String}` **ownerKey** *(Optional)* 
- A key name to identify the owner or a particular set of metadata. 
+ An object containing key /value pairs for shared metadata
+ - `{String}` **ownerKey** *(Optional)*
+ A key name to identify the owner or a particular set of metadata.
  - `{Object}` **obj** *(Optional)*
- An object containing the key value pairs of metadata 
- 欲知关于传递元数据的详情，请参阅相关的函数`$sf.ext.meta`。 
+ An object containing the key value pairs of metadata
+ 欲知关于传递元数据的详情，请参阅相关的函数`$sf.ext.meta`。
 
 **方法**
 
- - `{String|Number|Boolean}` **value**`(propKey, ownerKey)` 
- A method retrieves a metadata value from this object. 
- 方法参数: 
+ - `{String|Number|Boolean}` **value**`(propKey, ownerKey)`
+ A method retrieves a metadata value from this object.
+ 方法参数:
  - `{String}` **propKey**
- The name of the value to retrieve 
- - `{String}` **ownerKey** (Optional) 
- The name of the owner key of the metadata value. By default, it is assumed to be shared, so nothing needs to be passed in unless looking for a specific proprietary value 
+ The name of the value to retrieve
+ - `{String}` **ownerKey** (Optional)
+ The name of the owner key of the metadata value. By default, it is assumed to be shared, so nothing needs to be passed in unless looking for a specific proprietary value
 
-**返回:** 
+**返回:**
 
- - `{String|Number|Boolean}` 
+ - `{String|Number|Boolean}`
 
-**例子** 
+**例子**
 ``` html
-<!-- Host Side tags --> 
-<div id='tgtLREC'></div> 
-<script type='text/javascript'> 
- 
-var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub && 
-host.Config, conf, posConf, posMeta, shared, non_shared, pos; 
- 
-if (Config) { 
- 
-  conf = Config(); 
-if (!conf) conf = new 
+<!-- Host Side tags -->
+<div id='tgtLREC'></div>
+<script type='text/javascript'>
+
+var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub &&
+host.Config, conf, posConf, posMeta, shared, non_shared, pos;
+
+if (Config) {
+
+  conf = Config();
+if (!conf) conf = new
 Config({debug:true,cdn:"http://l.yimg.com",root:"/sf",
-	ver:"2-3-4",renderFile:"/html/render.html",to:30}) 
-  if (conf) { 
-    posConf    = new host.PosConfig("LREC","tgtLREC"); 
-    posConf.w  = 300; 
-    posConf.h  = 250; 
-    posConf.z  = 1000; 
-    shared   = {"context": "Music"}; 
-    non_shared = {spaceID: 90900909090, adID: 3423423432423}; 
-	posMeta  = new host.PosMeta(shared,"y",non_shared); 
-	//Use a signature for a key name (instead of "y"), 
-	//if you don't want 3rd parties accessing this data  
-	pos    = new host.Position("LREC","<Hello World I'm an Ad>",posMeta,posConf); 
-    host.render(pos); 
-  } 
-} 
-</script> 
- 
- 
-<!-- External Party tag --> 
-<script type='text/javascript'> 
- 
-var w = window, sf = w["$sf"], ext = sf && sf.ext, cntxt = ext && 
-ext.meta("context"), yspaceID = ext && ext.meta("spaceID","y"); 
- 
-alert(cntxt); //will say Music; 
- 
-alert(yspaceID); //will say 90900909090 
+	ver:"2-3-4",renderFile:"/html/render.html",to:30})
+  if (conf) {
+    posConf    = new host.PosConfig("LREC","tgtLREC");
+    posConf.w  = 300;
+    posConf.h  = 250;
+    posConf.z  = 1000;
+    shared   = {"context": "Music"};
+    non_shared = {spaceID: 90900909090, adID: 3423423432423};
+	posMeta  = new host.PosMeta(shared,"y",non_shared);
+	//Use a signature for a key name (instead of "y"),
+	//if you don't want 3rd parties accessing this data
+	pos    = new host.Position("LREC","<Hello World I'm an Ad>",posMeta,posConf);
+    host.render(pos);
+  }
+}
+</script>
+
+
+<!-- External Party tag -->
+<script type='text/javascript'>
+
+var w = window, sf = w["$sf"], ext = sf && sf.ext, cntxt = ext &&
+ext.meta("context"), yspaceID = ext && ext.meta("spaceID","y");
+
+alert(cntxt); //will say Music;
+
+alert(yspaceID); //will say 90900909090
 </script>
 ```
 
-### 4.8 函数 `$sf.host.boot` 
+### 4.8 函数 `$sf.host.boot`
 boot函数用于查找，处理和自动渲染数据的标签。它返回一个布尔值，响应是否已发现任何新的，未经加工的项。一旦进行处理，将所得的SafeFrame数据被添加到`$sf.info`。并且如果自动字段在`$sf.host.config`类中被设置为true，boot函数启动在数据定义的内容的渲染过程。
 
-**返回值** 
+**返回值**
 
- - `{Boolean}`  
- Indicates whether any new, unprocessed items have been found 
+ - `{Boolean}`
+ Indicates whether any new, unprocessed items have been found
 
 **相关章节**
 
  - 3   SafeFrame标签
- - 4.3 命名空间`$sf.info` 
- - 4.2 命名空间`$sf.host.conf` 
+ - 4.3 命名空间`$sf.info`
+ - 4.2 命名空间`$sf.host.conf`
 
 **例子**
 ``` html
-<!-- SafeFrame Inline Tag -->   
-<div id="tgtLREC">  
-<script type='text/x-safeframe' class='sf_data'>  
-{  
-	id: "LREC",  
-	src: "http://secondarydomain.com/safeframe",   
-	conf:  
-	{    
-	dest: "tgtLREC",  
-	size: "300x250"  
-	}   
-	meta:  
-	{    
-		rmx:  
-		{  
-			sectionID:"14800347",   
-			siteID: "140509"   
-		}  
-	}  
-}  
-</script>  
-<script type='text/javascript'>  
-try {  
-$sf.host.boot();  
-} catch (e) {  }  
-</script> 
- </div> 
+<!-- SafeFrame Inline Tag -->
+<div id="tgtLREC">
+<script type='text/x-safeframe' class='sf_data'>
+{
+	id: "LREC",
+	src: "http://secondarydomain.com/safeframe",
+	conf:
+	{
+	dest: "tgtLREC",
+	size: "300x250"
+	}
+	meta:
+	{
+		rmx:
+		{
+			sectionID:"14800347",
+			siteID: "140509"
+		}
+	}
+}
+</script>
+<script type='text/javascript'>
+try {
+$sf.host.boot();
+} catch (e) {  }
+</script>
+ </div>
 ```
 
 ### 4.9 函数`$sf.host.status`
@@ -1571,54 +1570,54 @@ status函数用于确定位置的状态。它返回一个指示页面中的是�
 **参数**
  - `{Object} positions`
  可选的对象参数提供了一个空的对象引用，它可以被代表每个SafeFrame正在管理的$sf.host.Position对象（使用其ID属性）的密钥列表中的一个填充。每个键的值包含一个对象，该对象有一个代表容器的当前状态的状态代码串。在此版本中，可能值如下：
- 　•  ready: the container is available for rendering but has not yet been rendered 
- 　•  loading: the container is currently in the process of being rendered 
- 　•  expanding: the container is currently in the process of expanding 
- 　•  expanded: the container is currently in expanded state 
- 　•  collapsing: the container is currently in the process of collapsing 
- 　•  error: the container has experienced an error that is preventing any interaction 
+ 　•  ready: the container is available for rendering but has not yet been rendered
+ 　•  loading: the container is currently in the process of being rendered
+ 　•  expanding: the container is currently in the process of expanding
+ 　•  expanded: the container is currently in expanded state
+ 　•  collapsing: the container is currently in the process of collapsing
+ 　•  error: the container has experienced an error that is preventing any interaction
 
 **返回值**
- - `{Boolean}`  
- Indicates whether or not the SafeFrame SDK is busy with an operation where the configuration cannot be updated 
+ - `{Boolean}`
+ Indicates whether or not the SafeFrame SDK is busy with an operation where the configuration cannot be updated
 
 **相关章节**
 
- - 5.1  命名空间`$sf.ext` 
- - 5.7  函数`$sf.ext.status` 
+ - 5.1  命名空间`$sf.ext`
+ - 5.7  函数`$sf.ext.status`
 
 **例子**
 ``` html
-<script type='text/javascript'>   
-var posDetail = {};  
-var isBusy    = $sf.host.status(posDetail);  
-var posID    = "";  
-var posInfo, posInfoStatus, posInfoDesc, posIDProc;    
- 
-if (isBusy) {  
-//Cannot change configuration while operations are ongoing, 
-inspect object to determine what is going on   
- 
-for (posID in posDetail)  
-{  
-	posInfo = posDetail[posID];  
-	//object has "status", "id", and "desc" properties   
-	 
-	posInfoStatus = posInfo.status;  
-	switch (posInfoStatus)  
-	{  
-		case "expanding":  
-		posIDProc = posID;  
-		break;  
-		case "collapsing":  
-		posIDProc = posID;  
-		break;  
-	}  
-	if (posIDProc) break;  
-}   
-if (posIDProc) alert(posIDProc + ", is " + posInfoStatus);  
-}  
-</script> 
+<script type='text/javascript'>
+var posDetail = {};
+var isBusy    = $sf.host.status(posDetail);
+var posID    = "";
+var posInfo, posInfoStatus, posInfoDesc, posIDProc;
+
+if (isBusy) {
+//Cannot change configuration while operations are ongoing,
+inspect object to determine what is going on
+
+for (posID in posDetail)
+{
+	posInfo = posDetail[posID];
+	//object has "status", "id", and "desc" properties
+
+	posInfoStatus = posInfo.status;
+	switch (posInfoStatus)
+	{
+		case "expanding":
+		posIDProc = posID;
+		break;
+		case "collapsing":
+		posIDProc = posID;
+		break;
+	}
+	if (posIDProc) break;
+}
+if (posIDProc) alert(posIDProc + ", is " + posInfoStatus);
+}
+</script>
 ```
 
 ### 4.10 函数`$sf.host.nuke `
@@ -1630,75 +1629,75 @@ Nuke不需要把新的内容加载到现有的位置。渲染函数会处理设�
 
 **参数**
 
- - `{String|String[]}` **id** 
- The id of the position to be removed; use "*" to remove all positions. 
+ - `{String|String[]}` **id**
+ The id of the position to be removed; use "*" to remove all positions.
 
 **例子**
 ``` html
-<div id='tgtLREC'></div>  
-<script type='text/javascript'>   
- 
-(function() {   
-var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub 
-&& host.Config,   
- 
-CONF_CDN   = "http://l.yimg.com",  
-CONF_ROOT   = "/sf",  
-CONF_VER  = "2-3-4",  
-CONF_RFILE  = "/html/render.html",  
-CONF_TO  = 30;   
- 
-function on_endposrender(posID, success)  
-{  
-//a render action total failure  
-} 
- 
-function on_posmsg(posID, msg, data) 
-{  
-//listen for messages  
-}   
-w.render_content  = function()  
-{  
-	var conf, posConf, pos,confDesc;   
-	 
-	if (Config) {  
-		conf = Config();  
-		if (!conf) {  
-		confDesc  =  
-		{  
-		debug: true,  
-		cdn:    CONF_CDN,  
-		root:    CONF_ROOT,  
-		ver:    CONF_VER,  
-		renderFile:  CONF_RFILE,  
-		to:    CONF_TO  
-		onEndPosRender:  on_endposrender,  
-		onPosMsg:    on_posmsg  
-		};  
-		conf = new Config(confDesc);  
-		}  
-		if (conf) {  
-			posConf    = new host.PosConfig("LREC","tgtLREC");  
-			posConf.w  = 300;  
-			posConf.h  = 250;  
-			posConf.z  = 1000;  
+<div id='tgtLREC'></div>
+<script type='text/javascript'>
+
+(function() {
+var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub
+&& host.Config,
+
+CONF_CDN   = "http://l.yimg.com",
+CONF_ROOT   = "/sf",
+CONF_VER  = "2-3-4",
+CONF_RFILE  = "/html/render.html",
+CONF_TO  = 30;
+
+function on_endposrender(posID, success)
+{
+//a render action total failure
+}
+
+function on_posmsg(posID, msg, data)
+{
+//listen for messages
+}
+w.render_content  = function()
+{
+	var conf, posConf, pos,confDesc;
+
+	if (Config) {
+		conf = Config();
+		if (!conf) {
+		confDesc  =
+		{
+		debug: true,
+		cdn:    CONF_CDN,
+		root:    CONF_ROOT,
+		ver:    CONF_VER,
+		renderFile:  CONF_RFILE,
+		to:    CONF_TO
+		onEndPosRender:  on_endposrender,
+		onPosMsg:    on_posmsg
+		};
+		conf = new Config(confDesc);
+		}
+		if (conf) {
+			posConf    = new host.PosConfig("LREC","tgtLREC");
+			posConf.w  = 300;
+			posConf.h  = 250;
+			posConf.z  = 1000;
 			pos      = new host.Position("LREC",
-				"<h1>Hello World I'm an Ad<h1>",null,posConf);  
-			host.render(pos);  
-		}  
-	}  
-}   
- 
-w.remove_content  = function()   
-{  
-	host.nuke("*"); //will remove all positions rendered or in 
-	process of rendering.  
-	//could also pass "LREC" in this case, or 
-	"LREC","SKY" if "LREC" and "SKY" ads were 
-	configured.  
-}  
-})();  
-</script> 
+				"<h1>Hello World I'm an Ad<h1>",null,posConf);
+			host.render(pos);
+		}
+	}
+}
+
+w.remove_content  = function()
+{
+	host.nuke("*"); //will remove all positions rendered or in
+	process of rendering.
+	//could also pass "LREC" in this case, or
+	"LREC","SKY" if "LREC" and "SKY" ads were
+	configured.
+}
+})();
+</script>
 ```
 
 ### 4.11 函数`$sf.host.get `
@@ -1706,29 +1705,29 @@ get函数用于获取SafeFrame容器的位置配置的参考。当SafeFrame回�
 
 **参数**
 
- - `{String}` **id** 
- The id of the position to get. 
+ - `{String}` **id**
+ The id of the position to get.
 
 **例子**
 ``` html
-<div id='tgtLREC'></div>  
-<script type='text/javascript'>   
- 
-(function() {   
-	var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub 
-	&& host.Config,   
-	 
-	// Configuration omitted for brevity   
-	 
-	function on_endposrender(posID, success)  
-	{  
-		var adPos = host.get(posID); 
-		if(!success) { 
-		  host.nuke(posID); 
-		} 
+<div id='tgtLREC'></div>
+<script type='text/javascript'>
+
+(function() {
+	var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub
+	&& host.Config,
+
+	// Configuration omitted for brevity
+
+	function on_endposrender(posID, success)
+	{
+		var adPos = host.get(posID);
+		if(!success) {
+		  host.nuke(posID);
+		}
 	}
 })();
-</script> 
+</script>
 ```
 
 ### 4.12 函数`$sf.host.render`
@@ -1736,10 +1735,10 @@ render函数用于呈现一个或多个的SafeFrame位置。
 
 你可以同时传递一个或多个`$sf.host.Position`对象（或对象的表现形式）以渲染一组容器。如果您传递回调函数给`$sf.host.Config`类，你会看到以以下顺序调用的回调函数：
 
- 1. onStartPosRender 
- 2. onEndPosRender (success / failure) 
- 3. onBeforePosMsg (if ad sends commands such as for expansion etc, allows you to return true to reject the message) 
- 4. onPosMsg (if ad sends commands such as for expansion, etc.) 
+ 1. onStartPosRender
+ 2. onEndPosRender (success / failure)
+ 3. onBeforePosMsg (if ad sends commands such as for expansion etc, allows you to return true to reject the message)
+ 4. onPosMsg (if ad sends commands such as for expansion, etc.)
 
 > **主站实现注意事项**
 > 当`$sf.host.nuke`已被调用给当前渲染的位置，`onEndPosRender`回调不能初始化。
@@ -1751,97 +1750,97 @@ render函数用于呈现一个或多个的SafeFrame位置。
 
 **相关章节**
 
- - 4.4 类`$sf.host.Config` 
+ - 4.4 类`$sf.host.Config`
  - 4.5 类`$sf.host.PosConfig`
- - 4.6 类`$sf.host.Position` 
+ - 4.6 类`$sf.host.Position`
 
 **例子**
 ``` html
-<div id='tgtLREC'></div>  
-<script type='text/javascript'>  
-(function() {   
-var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub 
-&& host.Config,   
- 
-CONF_CDN   = "http://l.yimg.com",  
-CONF_ROOT   = "/sf",  
-CONF_VER  = "2-3-4",  
-CONF_RFILE  = "/html/render.html",  
-CONF_TO  = 30;   
- 
-function on_endposrender(posID, success)  
-{  
-//a render action success  
-}  
- 
-function on_posmsg(posID, msg, data)  
-{  
-//listen for messages  
-} 
-w.render_content  = function()  
-{  
-	var conf, posConf, pos,confDesc;   
-	 
-	if (Config) {  
-		conf = Config();  
-		if (!conf) {  
-		confDesc =  
-		{    
-			debug:       true,  
-			cdn:        CONF_CDN,  
-			root:        CONF_ROOT,  
-			ver:        CONF_VER,  
-			renderFile:      CONF_RFILE,  
-			to:        CONF_TO  
-			onEndPosRender:    on_endposrender,  
-			onPosMsg:      on_posmsg  
-		};  
-		conf = new Config(confDesc);  
-		}  
-		if (conf) {  
-			posConf    = new host.PosConfig("LREC","tgtLREC");  
-			posConf.w  = 300;  
-			posConf.h  = 250;  
-			posConf.z  = 1000;  
+<div id='tgtLREC'></div>
+<script type='text/javascript'>
+(function() {
+var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub
+&& host.Config,
+
+CONF_CDN   = "http://l.yimg.com",
+CONF_ROOT   = "/sf",
+CONF_VER  = "2-3-4",
+CONF_RFILE  = "/html/render.html",
+CONF_TO  = 30;
+
+function on_endposrender(posID, success)
+{
+//a render action success
+}
+
+function on_posmsg(posID, msg, data)
+{
+//listen for messages
+}
+w.render_content  = function()
+{
+	var conf, posConf, pos,confDesc;
+
+	if (Config) {
+		conf = Config();
+		if (!conf) {
+		confDesc =
+		{
+			debug:       true,
+			cdn:        CONF_CDN,
+			root:        CONF_ROOT,
+			ver:        CONF_VER,
+			renderFile:      CONF_RFILE,
+			to:        CONF_TO
+			onEndPosRender:    on_endposrender,
+			onPosMsg:      on_posmsg
+		};
+		conf = new Config(confDesc);
+		}
+		if (conf) {
+			posConf    = new host.PosConfig("LREC","tgtLREC");
+			posConf.w  = 300;
+			posConf.h  = 250;
+			posConf.z  = 1000;
 			pos    = new host.Position("LREC",
-				"<h1>Hello World I'm an Ad<h1>",null,posConf);  
-			host.render(pos);        
-		}  
-	} 
-}  
- 
-w.remove_content  = function()  
-{  
-	host.nuke("*"); //will remove all positions rendered or in 
-	process of rendering.  
-	//could also pass "LREC" in this case, or 
-	"LREC","SKY" if "LREC" and "SKY" ads 
-	were configured.  
-}  
-})();  
-</script><div id='tgtLREC'></div>  
-<script type='text/javascript'>  
-(function() {   
-	var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub 
-	&& host.Config,   
-	 
-	CONF_CDN   = "http://l.yimg.com",  
-	CONF_ROOT   = "/sf",  
-	CONF_VER  = "2-3-4",  
-	CONF_RFILE  = "/html/render.html",  
-	CONF_TO  = 30;   
-	 
-	function on_endposrender(posID, success)  
-	{  
-	//a render action success  
-	}  
-	 
-	function on_posmsg(posID, msg, data)  
-	{  
-	//listen for messages  
+				"<h1>Hello World I'm an Ad<h1>",null,posConf);
+			host.render(pos);
+		}
 	}
-})();  
-</script> 
+}
+
+w.remove_content  = function()
+{
+	host.nuke("*"); //will remove all positions rendered or in
+	process of rendering.
+	//could also pass "LREC" in this case, or
+	"LREC","SKY" if "LREC" and "SKY" ads
+	were configured.
+}
+})();
+</script><div id='tgtLREC'></div>
+<script type='text/javascript'>
+(function() {
+	var w = window, sf = w["$sf"], pub = sf && sf.host, Config = pub
+	&& host.Config,
+
+	CONF_CDN   = "http://l.yimg.com",
+	CONF_ROOT   = "/sf",
+	CONF_VER  = "2-3-4",
+	CONF_RFILE  = "/html/render.html",
+	CONF_TO  = 30;
+
+	function on_endposrender(posID, success)
+	{
+	//a render action success
+	}
+
+	function on_posmsg(posID, msg, data)
+	{
+	//listen for messages
+	}
+})();
+</script>
 ```
 
 ## 5.第三方API实施
@@ -1856,9 +1855,9 @@ SafeFrame第三方API使用的命名空间和函数在第5.1至5.10节中描述�
 
 例如：
 
- - `$sf.ext.expand`调用被初始化. 
- - 在后台，SafeFrame处理`$ sf.ext.expand`并发送消息到主站。 
- - 如果`$ sf.ext.expand`再次被调用，处理第一次调用之前，因为只可以同时处理一个命令，它会被认为是一个错误。 
+ - `$sf.ext.expand`调用被初始化.
+ - 在后台，SafeFrame处理`$ sf.ext.expand`并发送消息到主站。
+ - 如果`$ sf.ext.expand`再次被调用，处理第一次调用之前，因为只可以同时处理一个命令，它会被认为是一个错误。
  - 如果是使用`$ sf.ext.register`提供的`$ sd.ext.expand`回调函数，那么函数被调用，而且一旦处理，成功或失败的通知会发出。
  - 成功或失败的结果产生之后，`$ sf.ext.expand`可以再次调用。
 
@@ -1867,38 +1866,38 @@ SafeFrame第三方API使用的命名空间和函数在第5.1至5.10节中描述�
 
 此事件提供第三方广告内容的状态。事件是从第三方SDK发射的，以便您可以通过`$ sf.ext.register`注册一个回调。
 
-> **实现注意事项** 
+> **实现注意事项**
 > `$ sf.ext.__ status_update`命名空间仅仅是隐式的，在JavaScript的层次结构不存在，但它在这里被调用，以记录当函数被调用，并提交给`$ sf.ext.register`的可能的参数。
-> 
+>
 
 回调函数与至少两个参数被调用：第一，一个表示状态的变化的字符串；第二，一个表示生成状态更新事件的命令的字符串，这是由生成的状态更新事件的第三方API初始化的命令发出的。如果第二个参数是一个空字符串，其含义是主站已强制状态更新，而不是由第三方API正在发起的命令启动的。
 
 **事件参数：**
 
- - `{String}` **status** 
- The status code string notifying external content of container updates. The following status codes are available: 
- 　**expanded** 
- 　The container has been expanded. 
- 　**collapsed** 
- 　The container is in the default collapsed state. 
- 　**failed** 
- 　A command initiated by the external party API did not succeed. 
- 　**geom-update** 
- 　The container geometry information has changed. Sent for events such when the  browser window is resized, parent container scrolls, or other geometric changes. 
- 　***focus-change*** 
- 　*The browser window / tab has become active (“focus”), or become in-active  (“blur”).* 
- - `{Object}` **data** *(Optional)* 
- Contains information about the original message or action requested of the Host or supplied by the host as a result of changes in the page. The following objects may be issued: 
- 　**cmd**  
- 　The original command sent with possible values such as: exp-ovr, exp-push, read-cookie, write-cookie, etc. 
- 　**reason** 
- 　Description information about whether the command succeeded or failed. 
- 　**info** 
- 　The information sent as part of the command echoed back to the caller, such as dimensions for expansion, the data to set for a cookie, etc. 
+ - `{String}` **status**
+ The status code string notifying external content of container updates. The following status codes are available:
+ 　**expanded**
+ 　The container has been expanded.
+ 　**collapsed**
+ 　The container is in the default collapsed state.
+ 　**failed**
+ 　A command initiated by the external party API did not succeed.
+ 　**geom-update**
+ 　The container geometry information has changed. Sent for events such when the  browser window is resized, parent container scrolls, or other geometric changes.
+ 　***focus-change***
+ 　*The browser window / tab has become active (“focus”), or become in-active  (“blur”).*
+ - `{Object}` **data** *(Optional)*
+ Contains information about the original message or action requested of the Host or supplied by the host as a result of changes in the page. The following objects may be issued:
+ 　**cmd**
+ 　The original command sent with possible values such as: exp-ovr, exp-push, read-cookie, write-cookie, etc.
+ 　**reason**
+ 　Description information about whether the command succeeded or failed.
+ 　**info**
+ 　The information sent as part of the command echoed back to the caller, such as dimensions for expansion, the data to set for a cookie, etc.
 
  **相关章节**
 
-  - 5.2 函数`$sf.ext.register` 
+  - 5.2 函数`$sf.ext.register`
   - 5.5 函数`$sf.ext.expand`
 
 ### 5.2 函数`$sf.ext.register`
@@ -1913,10 +1912,10 @@ SafeFrame第三方API使用的命名空间和函数在第5.1至5.10节中描述�
 **参数**
 
  - `{Number}` **initWidth**
- The initial / original width of the 3rd party content 
- - `{Number}` **initHeight** 
- The initial / original height of the 3rd party content 
- - `{Event}` **cb** 
+ The initial / original width of the 3rd party content
+ - `{Number}` **initHeight**
+ The initial / original height of the 3rd party content
+ - `{Event}` **cb**
  An optional callback function that will be called as a notification of event status
 
 **返回：**
@@ -1929,29 +1928,29 @@ SafeFrame第三方API使用的命名空间和函数在第5.1至5.10节中描述�
 
 **例子**
 ``` html
-<!-- External Party tag --> 
-<script type='text/javascript'> 
- 
-var w = window, sf = w["$sf"], ext = sf && sf.ext; 
- 
-function status_update(status, data) 
-{ 
- 
-} 
-if (ext) { 
-  try { 
-    ext.register(300, 250, status_update); 
- 
-alert(ext.meta("context"));  
-//read some metadata passed in from the host side 
-  } catch (e) { 
-    alert("no SafeFrame available"); 
-  } 
-} 
+<!-- External Party tag -->
+<script type='text/javascript'>
+
+var w = window, sf = w["$sf"], ext = sf && sf.ext;
+
+function status_update(status, data)
+{
+
+}
+if (ext) {
+  try {
+    ext.register(300, 250, status_update);
+
+alert(ext.meta("context"));
+//read some metadata passed in from the host side
+  } catch (e) {
+    alert("no SafeFrame available");
+  }
+}
 </script>
 ```
 
-### 5.3 函数 `$sf.ext.supports` 
+### 5.3 函数 `$sf.ext.supports`
 `$sf.ext.supports()`
 
 可用性：同步（可随时请求）
@@ -1960,38 +1959,38 @@ alert(ext.meta("context"));
 
 **返回**
 
- - `{Object}`  
- An object containing a list of SafeFrame container features that are available, defined as follows: 
- 　`{Boolean} exp-ovr`  
-Whether or not expansion is allowed in overlay mode. Default value is true. 
- 　`{Boolean} exp-push`  
- 　Whether or not expansion is allowed in push mode. Push expansion, a method of content expansion in which Host content is "pushed" instead of expanding over the content, is not yet supported in SafeFrame but may be supported separately by the Host. Default value is false.  
- 　`{Boolean} read-cookie` 
- 　Whether or not the host allows external party content to read host cookies. Default value is false. 
- 　`{Boolean} write-cookie` 
- 　Whether or not the host allows external party content to write cookies to the host domain. Despite value of true, the host may reject cookie values when offered if deemed appropriate. Default value is false. 
+ - `{Object}`
+ An object containing a list of SafeFrame container features that are available, defined as follows:
+ 　`{Boolean} exp-ovr`
+Whether or not expansion is allowed in overlay mode. Default value is true.
+ 　`{Boolean} exp-push`
+ 　Whether or not expansion is allowed in push mode. Push expansion, a method of content expansion in which Host content is "pushed" instead of expanding over the content, is not yet supported in SafeFrame but may be supported separately by the Host. Default value is false.
+ 　`{Boolean} read-cookie`
+ 　Whether or not the host allows external party content to read host cookies. Default value is false.
+ 　`{Boolean} write-cookie`
+ 　Whether or not the host allows external party content to write cookies to the host domain. Despite value of true, the host may reject cookie values when offered if deemed appropriate. Default value is false.
 
 **例子**
 ``` javascript
-//Sample JavaScript implementation 
-//Let's say that a 300x250 ad has been declared to fully expand to 400 
-pixels to the left and 200 pixels to the top. 
- 
- 
-function feature_check(which) 
-{ 
-  var o = $sf.ext.supports(); 
- 
-  return (o && o[which]); 
-} 
- 
- 
-function expand() 
-{ 
-  if (feature_check("exp_push")) { 
-    $sf.ext.expand({l:400,t:200,push:true}); 
-  } 
-} 
+//Sample JavaScript implementation
+//Let's say that a 300x250 ad has been declared to fully expand to 400
+pixels to the left and 200 pixels to the top.
+
+
+function feature_check(which)
+{
+  var o = $sf.ext.supports();
+
+  return (o && o[which]);
+}
+
+
+function expand()
+{
+  if (feature_check("exp_push")) {
+    $sf.ext.expand({l:400,t:200,push:true});
+  }
+}
 ```
 
 ### 5.4 函数` $sf.ext.geom`
@@ -2001,127 +2000,127 @@ function expand()
 
 所述的geom函数使SafeFrame容器的几何尺寸和位置，与它的与浏览器或应用程序窗口和其中主站内容正在被观看的设备的屏幕边界相关的内容交换。
 
-> **主站实现注意事项** 
+> **主站实现注意事项**
 > 如果调用，主站需要返回所请求的值。
-> 
+>
 
 该信息可用于：
 
  - 决定内容扩展的可用的方向和尺寸
  - 确定SafeFrame容器是否“在视图中”
 
-> **广告可见度注** 
+> **广告可见度注**
 > SafeFrame提供了可在根据接受的工业建议的可用性方面报告的信息；然而，SafeFrame不直接报告可见度指标。一个对于报告可见度是必要的指标是持续时间，它必须通过注册状态更新监听器来得到，以确定为`self.iv`被注册为`true`要用多久的持续时间。如果要了解关于`$ sf.ext.register`功能的详细信息，请查阅第5.2节。
-> 
+>
 
 **返回**
 
- - `{Object} g`  
+ - `{Object} g`
  An object containing sub objects with geometric information about the container. Geometric information may be returned as described in the following lists
- 
- **win** 
- Identifies the location, width, and height (in pixels) of the browser or application window boundaries relative to the device screen. 
- 　•  {Number} t 
- 　The y coordinate (in pixels) of the top boundary of the browser or application window relative to the screen 
- 　•  {Number} b  
- 　The y coordinate (in pixels) of the bottom boundary of the browser or application window relative to the screen 
- 　•  {Number} l  
- 　The x coordinate (in pixels) of the left boundary of the browser or application window relative to the screen 
- 　•  {Number} r  
- 　The x coordinate (in pixels) of the right boundary of the browser or application window relative to the screen 
- 　•  {Number} w  
- 　The width (in pixels) of the browser or application window (win.r – win.l) 
- 　•  {Number} h  
- 　•  The height (in pixels) of the browser or application window (win.b – win.t) 
+
+ **win**
+ Identifies the location, width, and height (in pixels) of the browser or application window boundaries relative to the device screen.
+ 　•  {Number} t
+ 　The y coordinate (in pixels) of the top boundary of the browser or application window relative to the screen
+ 　•  {Number} b
+ 　The y coordinate (in pixels) of the bottom boundary of the browser or application window relative to the screen
+ 　•  {Number} l
+ 　The x coordinate (in pixels) of the left boundary of the browser or application window relative to the screen
+ 　•  {Number} r
+ 　The x coordinate (in pixels) of the right boundary of the browser or application window relative to the screen
+ 　•  {Number} w
+ 　The width (in pixels) of the browser or application window (win.r – win.l)
+ 　•  {Number} h
+ 　•  The height (in pixels) of the browser or application window (win.b – win.t)
  　
- **self** 
- Identifies the z-index and location, width, and height (in pixels) of the SafeFrame container relative to the browser or application window (win). In addition, width, height, and area percentage of SafeFrame content in view is provided, based on how much of the container is located within the boundaries of the browser or application window (win). 
- 　•  {Number} t  
- 　The y coordinate (in pixels) of the top boundary of the SafeFrame container 
- 　•  {Number} l  
- 　The x coordinate (in pixels) of the left side boundary of the SafeFrame container  
- 　•  {Number} r  
- 　The x coordinate (in pixels) of the right side boundary of the SafeFrame container (self.l + width of container) 
- 　•  {Number} b  
- 　The y coordinate (in pixels) of the bottom boundary of the SafeFrame container (self.t + height of container) 
- 　•  {Number} xiv  
- 　The percentage (%) of width for the SafeFrame container that is in view (formatted as "0.14" or "1") 
- 　•  {Number} yiv  
- 　•  The percentage (%) of height for the SafeFrame container that is in view (formatted as "0.14" or "1") 
- 　•  {Number} iv  
- 　The percentage (%) of area for the SafeFrame container that is in view (formatted as "0.14" or "1") 
- 　•  {Number} z  
- 　The Z-index of the SafeFrame container 
- 　•  {Number} w  
- 　The width (in pixels) of the SafeFrame container  
- 　•  {Number} h  
- 　The height (in pixels) of the SafeFrame container 
+ **self**
+ Identifies the z-index and location, width, and height (in pixels) of the SafeFrame container relative to the browser or application window (win). In addition, width, height, and area percentage of SafeFrame content in view is provided, based on how much of the container is located within the boundaries of the browser or application window (win).
+ 　•  {Number} t
+ 　The y coordinate (in pixels) of the top boundary of the SafeFrame container
+ 　•  {Number} l
+ 　The x coordinate (in pixels) of the left side boundary of the SafeFrame container
+ 　•  {Number} r
+ 　The x coordinate (in pixels) of the right side boundary of the SafeFrame container (self.l + width of container)
+ 　•  {Number} b
+ 　The y coordinate (in pixels) of the bottom boundary of the SafeFrame container (self.t + height of container)
+ 　•  {Number} xiv
+ 　The percentage (%) of width for the SafeFrame container that is in view (formatted as "0.14" or "1")
+ 　•  {Number} yiv
+ 　•  The percentage (%) of height for the SafeFrame container that is in view (formatted as "0.14" or "1")
+ 　•  {Number} iv
+ 　The percentage (%) of area for the SafeFrame container that is in view (formatted as "0.14" or "1")
+ 　•  {Number} z
+ 　The Z-index of the SafeFrame container
+ 　•  {Number} w
+ 　The width (in pixels) of the SafeFrame container
+ 　•  {Number} h
+ 　The height (in pixels) of the SafeFrame container
  　
- **exp** 
- Identifies the expected distance available for expansion within the host content along with information about whether controls allow the end user to scroll the page. If “scrollable,” the SafeFrame content can expand to dimensions greater than those provided.  
- 　•  {Number} t  
- 　The number of pixels that can be expanded upwards 
- 　•  {Number} l  
- 　The number of pixels that can be expanded left 
- 　•  {Number} r  
- 　The number of pixels that can be expanded right 
- 　•  {Number} b  
- 　The number of pixels that can be expanded down 
- 　•  {Number/Boolean} xs  
- 　A response that indicates whether the host content is scrollable along the x-axis (1 = scrollable; 0 = not scrollable)  
- 　•  {Number/Boolean} yx  
+ **exp**
+ Identifies the expected distance available for expansion within the host content along with information about whether controls allow the end user to scroll the page. If “scrollable,” the SafeFrame content can expand to dimensions greater than those provided.
+ 　•  {Number} t
+ 　The number of pixels that can be expanded upwards
+ 　•  {Number} l
+ 　The number of pixels that can be expanded left
+ 　•  {Number} r
+ 　The number of pixels that can be expanded right
+ 　•  {Number} b
+ 　The number of pixels that can be expanded down
+ 　•  {Number/Boolean} xs
+ 　A response that indicates whether the host content is scrollable along the x-axis (1 = scrollable; 0 = not scrollable)
+ 　•  {Number/Boolean} yx
  　A response that indicates whether the host content is scrollable along the y-axis (1 = scrollable; 0 = not scrollable)
  　
  由于计算几何信息和交换消息会影响性能，几何信息应只在以下时间段更新：
- 
+
  　**SafeFrame容器的首次渲染**
  　当SafeFrame容器首次被渲染时，`$sf.ext.geom`应被处理，并与要渲染的第三方内容一起发送结果。
  　
  　**当改变SafeFrame容器的大小或位置时**
  　当使用下列功能之一改变容器尺寸或位置时，`$ sf.ext.geom`函数应该被处理：
- 　　o  `$sf.ext.expand` 
+ 　　o  `$sf.ext.expand`
  　　o  `$sf.ext.collapse`
  　　
- 　**当来源于主站的外部更新被接收时** 
- 　　o  收到来自从其中该容器的几何形状已经被主站自己更新的主站端的信息，例如强制内容折叠。查看注册回调消息。 
+ 　**当来源于主站的外部更新被接收时**
+ 　　o  收到来自从其中该容器的几何形状已经被主站自己更新的主站端的信息，例如强制内容折叠。查看注册回调消息。
  　　o  在所有可视面积的滚动，但是只允许每秒一个更新（节流）。
  　　o  在所有可视面积的大小调整，但是只允许每秒一个更新（节流）。
 
-> **主站实现注意事项** 
+> **主站实现注意事项**
 > 对于滚动或调整事件，SafeFrames主站实施应该只侦听要么是裁剪或滚动上面的SafeFrame容器上的第一个父HTML元素的事件。
-> 
+>
 
 **例子**
 ``` javascript
-//Sample JavaScript implementation 
-//Let's say that a 300x250 ad has been declared to fully expand to 400 pixels 
-to the left and 200 pixels to the top. 
- 
-function expand() 
-{ 
-    var w = window, sf = w["$sf"], ext = sf && sf.ext, g, ex; 
- 
-    if (ext) { 
-      try { 
-        g  = ext.geom(); 
-        ex  = g && g.exp; 
-        if (Math.abs(ex.l) >= 400 && Math.abs(ex.t) >= 200) { 
-            ext.expand({l:400,t:200}); 
-        } 
-      } catch (e) { 
-        //do not expand, not enough room 
-      } 
-    } else { 
-      //api expansion not supported 
-    } 
-  } 
- 
- function status_update_handler(status) 
-  { 
-   if (status == "expanded") { 
-      // The ad has finished expanding 
-    } 
-  } 
+//Sample JavaScript implementation
+//Let's say that a 300x250 ad has been declared to fully expand to 400 pixels
+to the left and 200 pixels to the top.
+
+function expand()
+{
+    var w = window, sf = w["$sf"], ext = sf && sf.ext, g, ex;
+
+    if (ext) {
+      try {
+        g  = ext.geom();
+        ex  = g && g.exp;
+        if (Math.abs(ex.l) >= 400 && Math.abs(ex.t) >= 200) {
+            ext.expand({l:400,t:200});
+        }
+      } catch (e) {
+        //do not expand, not enough room
+      }
+    } else {
+      //api expansion not supported
+    }
+  }
+
+ function status_update_handler(status)
+  {
+   if (status == "expanded") {
+      // The ad has finished expanding
+    }
+  }
 ```
 
 ### 5.5 函数`$sf.ext.expand`
@@ -2137,22 +2136,22 @@ SafeFrame中不支持补间，所以每当它需要扩大到其最大尺寸时�
 
 **参数：**
 
- - `{Object}` **obj** 
- A descriptor object that defines the top, left, bottom, right coordinates for expansion. At minimum, 1 value must be specified. 
- - `{Number}` **obj.t** 
- The new top coordinate (y) relative to the current top coordinate. 
- - `{Number}` **obj.l** 
- The new left coordinate (x) relative to the current left coordinate. 
- - `{Number}` **obj.r**  
- The new right coordinate (x+width) relative to the current right coordinate (x+width). 
- - `{Number}` **obj.b** 
- The new bottom coordinate (y+height) relative to the current top coordinate (y+height). 
- - `{Boolean}` **obj.push**  
- Whether or not expansion should push the host content, rather than overlay. 
+ - `{Object}` **obj**
+ A descriptor object that defines the top, left, bottom, right coordinates for expansion. At minimum, 1 value must be specified.
+ - `{Number}` **obj.t**
+ The new top coordinate (y) relative to the current top coordinate.
+ - `{Number}` **obj.l**
+ The new left coordinate (x) relative to the current left coordinate.
+ - `{Number}` **obj.r**
+ The new right coordinate (x+width) relative to the current right coordinate (x+width).
+ - `{Number}` **obj.b**
+ The new bottom coordinate (y+height) relative to the current top coordinate (y+height).
+ - `{Boolean}` **obj.push**
+ Whether or not expansion should push the host content, rather than overlay.
 
- > **实现注意事项** 
+ > **实现注意事项**
  > “推”的功能是一种在在第三方内容扩展方向（或多个）上“推动”主站内容的拓展功能。对于支持推动扩大功能的技术不是直接由SafeFrame1.0规定的。主站必须明确声明Push是否在`$ sf.host.posConfig`对象的`supports`属性中被允许。如果允许，主站必须能够在技术上支持该功能。
- > 
+ >
 
 **返回：**
 
@@ -2160,29 +2159,29 @@ SafeFrame中不支持补间，所以每当它需要扩大到其最大尺寸时�
 
 **例子**
 ``` javascript
-//Sample JavaScript implementation 
-//Let's say that a 300x250 ad has been declared to fully expand to 400 
-pixels to the left and 200 pixels to the top. 
- 
-var expansionPending = false; 
-var expanded      = false; 
- 
-function expand() 
-{ 
-    var w = window, sf = w["$sf"], ext = sf && sf.ext; 
- 
-    if (ext) { 
-      ext.expand({l:400,t:200}); 
-    } else { 
-      //api expansion not supported 
-    } 
-  } 
- 
- function status_update_handler(status) 
-  { 
-  if (status == "expanded") { 
-      // The ad has finished expanding 
-} 
+//Sample JavaScript implementation
+//Let's say that a 300x250 ad has been declared to fully expand to 400
+pixels to the left and 200 pixels to the top.
+
+var expansionPending = false;
+var expanded      = false;
+
+function expand()
+{
+    var w = window, sf = w["$sf"], ext = sf && sf.ext;
+
+    if (ext) {
+      ext.expand({l:400,t:200});
+    } else {
+      //api expansion not supported
+    }
+  }
+
+ function status_update_handler(status)
+  {
+  if (status == "expanded") {
+      // The ad has finished expanding
+}
 }
 ```
 
@@ -2199,26 +2198,26 @@ function expand()
 
 **例子**
 ``` javascript
-//Sample JavaScript implementation 
- 
-function collapse() 
-{ 
-    var w = window, sf = w["$sf"], ext = sf && sf.ext; 
- 
-    if (ext) { 
-      ext.collapse(); 
-    } else { 
-      //api expansion not supported 
-    } 
-  } 
- 
- function status_update_handler(status) 
-  { 
-   if (status == "expanded") { 
-      // Expanded 
-    } else if (status == "collapsed") { 
-      //we called collapse 
-    } 
+//Sample JavaScript implementation
+
+function collapse()
+{
+    var w = window, sf = w["$sf"], ext = sf && sf.ext;
+
+    if (ext) {
+      ext.collapse();
+    } else {
+      //api expansion not supported
+    }
+  }
+
+ function status_update_handler(status)
+  {
+   if (status == "expanded") {
+      // Expanded
+    } else if (status == "collapsed") {
+      //we called collapse
+    }
   }
 ```
 
@@ -2231,15 +2230,15 @@ function collapse()
 
 **返回**
 
- - `{String}` One of the following strings may be returned 
- **expanded** 
- Denotes that the container has been expanded. 
- **expanding** 
- Denotes that an expansion command is pending. 
- **collapsed** 
- Denotes that the container is in the default collapsed state. 
- **collapsing** 
- Denotes that a collapse command is pending. 
+ - `{String}` One of the following strings may be returned
+ **expanded**
+ Denotes that the container has been expanded.
+ **expanding**
+ Denotes that an expansion command is pending.
+ **collapsed**
+ Denotes that the container is in the default collapsed state.
+ **collapsing**
+ Denotes that a collapse command is pending.
 
 **相关章节**
 
@@ -2254,10 +2253,10 @@ function collapse()
 
 **参数**
 
- - `{String} propName` 
- The name of the metadata value you want to read 
+ - `{String} propName`
+ The name of the metadata value you want to read
  - `{String} ownerKey` *(Optional)*
- The name of the owner object from which to read the property. By default this value is "shared" meaning look in common data. 
+ The name of the owner object from which to read the property. By default this value is "shared" meaning look in common data.
 
 **返回：**
 
@@ -2265,17 +2264,17 @@ function collapse()
 
 **例子：1 -检索共享的元数据值**
 ``` javascript
-//External Party JavaScript code (inside SafeFrame container) 
- 
-  var posID  = $sf.ext.meta("pos"); 
+//External Party JavaScript code (inside SafeFrame container)
+
+  var posID  = $sf.ext.meta("pos");
 ```
 
 **例子：2 -检索非共享的元数据值**
 ``` javascript
-//External Party JavaScript code (inside SafeFrame container) 
-//"rmx" == owner of metadata blob, "sectionID" is key to retrieve 
- 
-  var sectionID  = $sf.ext.meta("sectionID", "rmx"); 
+//External Party JavaScript code (inside SafeFrame container)
+//"rmx" == owner of metadata blob, "sectionID" is key to retrieve
+
+  var sectionID  = $sf.ext.meta("sectionID", "rmx");
 ```
 
 **相关章节**
@@ -2289,104 +2288,104 @@ function collapse()
 
 将消息发送到主站以在主站域名读或写cookie。请注意，如果主站支持此功能，cookie数据是不能直接从该函数返回，因为它是异步的。你必须传递一个函数到`$sf.ext.register`，然后这将在Cookie数据设置或检索时被调用。
 
-> **主站实现注意事项** 
+> **主站实现注意事项**
 > 允许一个第三方来读取或设置cookies，会带来某些安全页面，如登录页面，的安全风险。在允许之前，考虑允许cookie的读取或设置对于网页是否安全。
 >
 
 **参数**
 
- - `{String} cookieName`   
- The name of the cookie to set or read.   
- - `{Object} cookieData`  *(Optional)* 
- An object that contains the value, and potentially an expiration date, of a cookie to be set.  If not set, the Host assumes that External Party content is only interested in reading the Host cookie value. If set but no expiration date is given, the Host assumes that any cookie written to the Host domain is intended to remain indefinitely. 
- 如果提供了以下参数: 
- 　`{String} cookieData.info` *(Required)*   
- 　A string value for the cookie. 
- 　`{Date} cookieData.expires` *(Optional)*  
- 　A date for when the cookie should expire. 
+ - `{String} cookieName`
+ The name of the cookie to set or read.
+ - `{Object} cookieData`  *(Optional)*
+ An object that contains the value, and potentially an expiration date, of a cookie to be set.  If not set, the Host assumes that External Party content is only interested in reading the Host cookie value. If set but no expiration date is given, the Host assumes that any cookie written to the Host domain is intended to remain indefinitely.
+ 如果提供了以下参数:
+ 　`{String} cookieData.info` *(Required)*
+ 　A string value for the cookie.
+ 　`{Date} cookieData.expires` *(Optional)*
+ 　A date for when the cookie should expire.
 
 **例子1：读取一个主站cookie**
 ``` javascript
-//Sample JavaScript implementation 
-var w = window, sf = w[“$sf”], sfAPI = sf && sf.ext, myPubCookieName = 
-“foo”, myPubCookieValue = “”, fetchingCookie = false; 
- 
-function register_content() 
-{ 
-  var e; 
-  try { 
-    if (sfAPI) sfAPI.register(300,250,status_update_handler); 
-  } catch (e) { 
-    //console.log(“no sfAPI -- > “ + e.message); 
-       sfAPI = null; 
-    } 
-} 
- 
-function get_host_cookie() 
-{ 
-  var e; 
- 
-       try { 
-      if (sfAPI && sfAPI.supports(“read-cookie”)) { 
-fetchingCookie = sfAPI.cookie(“foo”); 
-      } 
-    } catch (e) { 
-      fetchingCookie = false; 
-    } 
-} 
- 
-function status_update_handler(status, data) 
-{ 
-   if (status == "read-cookie") {  
-    myPubCookieValue = data; 
-    //now do whatever here since you have the cookie data 
-  }  
-} 
+//Sample JavaScript implementation
+var w = window, sf = w[“$sf”], sfAPI = sf && sf.ext, myPubCookieName =
+“foo”, myPubCookieValue = “”, fetchingCookie = false;
+
+function register_content()
+{
+  var e;
+  try {
+    if (sfAPI) sfAPI.register(300,250,status_update_handler);
+  } catch (e) {
+    //console.log(“no sfAPI -- > “ + e.message);
+       sfAPI = null;
+    }
+}
+
+function get_host_cookie()
+{
+  var e;
+
+       try {
+      if (sfAPI && sfAPI.supports(“read-cookie”)) {
+fetchingCookie = sfAPI.cookie(“foo”);
+      }
+    } catch (e) {
+      fetchingCookie = false;
+    }
+}
+
+function status_update_handler(status, data)
+{
+   if (status == "read-cookie") {
+    myPubCookieValue = data;
+    //now do whatever here since you have the cookie data
+  }
+}
 ```
 
 **例子2：写一个主站cookie**
 ``` javascript
-//Sample JavaScript implementation 
-var w = window, sf = w[“$sf”], sfAPI = sf && sf.ext, myPubCookieName = 
-“foo”, myPubCookieValue = “”, settingCookie = false; 
- 
-function register_content() 
-{ 
-  var e; 
-  try { 
-    if (sfAPI) sfAPI.register(300,250,status_update_handler); 
-  } catch (e) { 
-    //console.log(“no sfAPI -- > “ + e.message); 
-       sfAPI = null; 
-    } 
-} 
- 
-function set_host_cookie(newVal) 
-{ 
-  var e, cookieData = {value:newVal,expires:new Date(2020, 11, 1)}; 
- 
-       try { 
-      if (sfAPI && sfAPI.supports(“write-cookie”)) { 
-settingCookie = sfAPI.cookie(“foo”, cookieData); 
-      } 
-    } catch (e) { 
-      settingCookie = false; 
-    } 
-} 
- 
-function status_update_handler(status, data) 
-{ 
-   if (status == "write-cookie") { 
-    myPubCookieValue = data.info; 
-    //now do whatever here since the write was successful 
-  } else if (status == “failed” && data.cmd == “write-cookie”) { 
-    //data.cmd contains original command sent 
-       //data.reason contains a description of failure 
-    //data.info contains the object of information sent to host 
-    settingCookie = false; 
-    //cookie not allowed to be set 
-  } 
-} 
+//Sample JavaScript implementation
+var w = window, sf = w[“$sf”], sfAPI = sf && sf.ext, myPubCookieName =
+“foo”, myPubCookieValue = “”, settingCookie = false;
+
+function register_content()
+{
+  var e;
+  try {
+    if (sfAPI) sfAPI.register(300,250,status_update_handler);
+  } catch (e) {
+    //console.log(“no sfAPI -- > “ + e.message);
+       sfAPI = null;
+    }
+}
+
+function set_host_cookie(newVal)
+{
+  var e, cookieData = {value:newVal,expires:new Date(2020, 11, 1)};
+
+       try {
+      if (sfAPI && sfAPI.supports(“write-cookie”)) {
+settingCookie = sfAPI.cookie(“foo”, cookieData);
+      }
+    } catch (e) {
+      settingCookie = false;
+    }
+}
+
+function status_update_handler(status, data)
+{
+   if (status == "write-cookie") {
+    myPubCookieValue = data.info;
+    //now do whatever here since the write was successful
+  } else if (status == “failed” && data.cmd == “write-cookie”) {
+    //data.cmd contains original command sent
+       //data.reason contains a description of failure
+    //data.info contains the object of information sent to host
+    settingCookie = false;
+    //cookie not allowed to be set
+  }
+}
 ```
 
 ### 5.10 函数`$sf.ext.inViewPercentage`
@@ -2396,44 +2395,44 @@ function status_update_handler(status, data)
 
 返回其中容器是在屏幕上视图内的区域的百分比，作为0到100之间的整数。
 
-> **实现注意事项** 
+> **实现注意事项**
 > 在这个函数提供的信息在`$ sf.ext.geom`函数内是可用的，作为`self.iv`值返回。此附加函数被提供作为更方便访问该信息的便利。
 >
 
 **返回：**
 
- - `{Number}` The percentage of area that a container is in view on the screen 
+ - `{Number}` The percentage of area that a container is in view on the screen
 
 **行业标准可广告见度**
 业界公认的可见度指标可能需要报告的可见曝光的持续时间组件。持续时间可以通过计算`$ sf.ext.inViewPercentage`值多久达到或超过一个可见曝光的最小百分比来决定。
 
 下面的代码示例演示了注册的"监听者"是怎样可能会确定持续时间（粗体值指被业界公认的广告能见度值代替）：
 ``` javascript
-var viewableTimerId = 0; 
-var viewableFired = false; 
- 
-function nodifyViewablePassed() 
-{ 
-if(viewableFired) return; // fire beacon 
-viewableFired = true; 
-viewableTimerId = 0; 
-}  
- 
-function status_update(status, data)  
-{  
-// notify if 50% in view for 1 second  
-if($sf.ext.inViewPercentage() > 50) 
-{   
-if(viewableTimerId == 0){ 
-viewableTimerId = setTimeout(function() 
-{notifyViewablePassed(); }, 1000);} 
-}  
-else{ 
-clearTimeout(viewableTimerId); 
-}  
-} 
- 
-$sf.ext.register(160, 650, status_update) 
+var viewableTimerId = 0;
+var viewableFired = false;
+
+function nodifyViewablePassed()
+{
+if(viewableFired) return; // fire beacon
+viewableFired = true;
+viewableTimerId = 0;
+}
+
+function status_update(status, data)
+{
+// notify if 50% in view for 1 second
+if($sf.ext.inViewPercentage() > 50)
+{
+if(viewableTimerId == 0){
+viewableTimerId = setTimeout(function()
+{notifyViewablePassed(); }, 1000);}
+}
+else{
+clearTimeout(viewableTimerId);
+}
+}
+
+$sf.ext.register(160, 650, status_update)
 ```
 
 ### 5.11 函数`$sf.ext.winHasFocus`
@@ -2454,23 +2453,23 @@ $sf.ext.register(160, 650, status_update)
 **与广告可见度的关系**
 除了几何坐标，一个SafeFrame内的内容可能想知道主窗口是当前活动，或聚焦。该函数提供了信息，而且在报告可见度指标时可以被考虑。
 
-> **广告可见度注** 
+> **广告可见度注**
 > `winHasFocus`函数提供了可被认为是可见度指标的部分的信息。这个函数报告的信息并不能决定或报告可见度。可见度指标是由行业和参与报告可见度的媒体的各方确定。
 >
 
 下面的代码示例演示了一个注册的监听器会如何确定主浏览器窗口或选项卡是否聚焦。
 ``` javascript
-var win_has_focus = false; 
- 
-function status_update(status, data) 
-{ 
-// notify if 50% in view for 1 second 
-if(status == “focus-change”) { 
-    win_has_focus = $sf.ext.winHasFocus(); 
-} 
-} 
- 
-$sf.ext.register(160, 650, status_update) 
+var win_has_focus = false;
+
+function status_update(status, data)
+{
+// notify if 50% in view for 1 second
+if(status == “focus-change”) {
+    win_has_focus = $sf.ext.winHasFocus();
+}
+}
+
+$sf.ext.register(160, 650, status_update)
 ```
 
 

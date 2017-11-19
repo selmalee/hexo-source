@@ -1,17 +1,17 @@
 ---
 title: JavaScript学习笔记之对象及继承
 date: 2016-08-07 00:37:00
-tags: [JavaScript,原型链,继承]
-categories: 
- - JavaScript
+tags: JavaScript
+categories:
+ - 学习笔记
 ---
 
 ## 对象属性
 　　ES5中有两种属性，数据属性和访问器属性。
+<!--more-->
 　　数据属性包括[[writable]]（能否修改属性的值）、[[value]]等等；
 　　访问器属性包括[[Configurable]]（能否通过delete删除属性、能否修改属性的特性）、[[Enumerable]]（能否通过for-in循环返回属性）、[[Get]]、[Set]]
 　　要修改属性则使用Object.defineProperty()，这个方法接收三个参数：属性所在的对象、属性的名字和一个描述符对象。其中描述符对象的属性必须是：configurable、enumerable、writable和value。如下面的代码
-
 ``` js
 var person = {};
 Object.defineProperty(person, "name", {
@@ -23,7 +23,7 @@ alert(person.name); //"Nicholas"
 delete person.name;
 alert(person.name); //"Nicholas"
 ```
-<!--more-->
+
 　　也可以使用Object.defineProperties()定义多个属性
 
 ``` js

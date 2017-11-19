@@ -1,13 +1,13 @@
 ---
 title: 移动端重构遇到的坑（长期更新）
 date: 2016-11-04 00:47:34
-tags: [重构,移动端]
+tags: 重构
 categories:
  - 实践
 ---
+
 这篇文章用来记录平时移动端重构遇到的坑，以备忘，长期更新。
 <!-- more -->
-
 ## 键盘遮挡影响布局
 坑：ios下fixed属性失效。在编辑框输入内容时会弹出软键盘，而手机屏幕区域有限往往会遮住输入界面。
 如下面截图，图片来自[%幻#影% - 博客园](http://www.cnblogs.com/cmblogs/p/4448336.html)
@@ -65,6 +65,23 @@ fix：
  - 根元素设成50px，以50px为基准，即好算，而且小数位会少一点。
  - 残暴点的就不用rem，用px，再想其他的自适应方案。
 
+## input[type="file"]的change事件只调用一次
+调用一次之后发现输入框没有绑定change事件，所以在回调函数内再绑定一次change事件。
+``` js
+$('input[type="file"]').on('change', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  var $target = $(e.target);
+  var fileList = e.target.files||e.dataTransfer.files;
+  // do something
+  $target.replaceWith('<input type="file" class="fd-file" data-fd="file" id="file"'+Math.random()+'>');
+  $('input[type="file"').on('change', function(e) {
+    var $target = $(e.target);
+    var fileList = e.target.files||e.dataTransfer.files;
+    // do something
+  })
+})
+```
 
 ## 参考
  - [用document.title=“xxx”动态修改title，在ios的微信下面不生效](https://segmentfault.com/q/1010000002926291)

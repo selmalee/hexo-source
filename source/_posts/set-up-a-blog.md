@@ -1,12 +1,13 @@
 ---
 title: 三小时建成github pages + hexo博客
 date: 2016-07-24 21:10:10
-tags: [hexo,博客]
+tags: 博客
 categories:
  - 实践
 ---
-因为受到了[戴老板](https://woohoodai.github.io/)的激励和羡慕身边大神都有个炫酷的博客，所以下午的时候花时间建立起这个博客。得益于网络教程，发现原来并不难。以下是这一过程的记录，顺便练练markdown。
 
+因为受到了[戴老板](https://woohoodai.github.io/)的激励和羡慕身边大神都有个炫酷的博客，所以下午的时候花时间建立起这个博客。得益于网络教程，发现原来并不难。以下是这一过程的记录，顺便练练markdown。
+<!-- more -->
 ## 为什么要建立这个博客
 ### 为什么选择GitHub Pages
 -   域名是github的二级域名，不用给空间付费，不用给域名付费
@@ -14,7 +15,6 @@ categories:
 -   支持本地编写、本地预览
 -   seo优化上，github在google上权重高
 
-<!--more-->
 ### 为什么我要写博客
 -   本人表达能力不佳，把脑里的东西写下来能让我印象更深刻，提高我将事情讲清楚的能力和逻辑思维能力
 -   有利于我积累更多的知识，并享受分享带来的连锁反应
@@ -50,6 +50,8 @@ Enter same passphrase again:<再次输入加密串>
 看到这样的界面就成功设置ssh key了。
 ![成功设置 ssh key](/static/2016/07/1.png)
 
+注意：如果你使用的是mac，需要在命令前加上sudo，详细可以看这篇文章[Hexo部署时提示Fatal： Could not read from remote repository的问题处理](http://idealife.github.io/2015/10/02/Hexo%E9%83%A8%E7%BD%B2%E6%97%B6%E6%8F%90%E7%A4%BAfatal-Could-not-read-from-remote-repository%E7%9A%84%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/)
+
 ### 将SSH Key添加到Github上
 1.  打开本地C:\Documents and Settings\Administrator\.ssh\id_rsa.pub文件。路径也有可能是C:\Users\Administrator\.ssh，你可以直接在C盘中查找id_rsa.pub文件。此文件里面内容为刚才生成人密钥。如果看不到这个文件，你需要设置显示隐藏文件。打开，准确的复制这个文件的内容。
 2.  登陆github系统。点击右上角的图像--->Settings ---> SSH and GPG keys。
@@ -76,6 +78,7 @@ $ git config --global user.name "seminelee"//用户名
 $ git config --global user.email  "may.air@qq.com"//填写自己的邮箱
 ```
 完成以上步骤后本机就已成功连接到github
+
 
 ## 开始建立博客
 与GitHub建立好链接之后，就可以方便的使用它提供的Pages服务，GitHub Pages分两种，一种是你的GitHub用户名建立的username.github.io这样的用户&组织页（站），另一种是依附项目的pages。
@@ -169,7 +172,7 @@ $ hexo d #deploy开发环境
 ```
 如果在执行 hexo deploy 后,出现 error deployer not found:github 的错误，网上说是hexo 更新到3.0之后的一个坑，则需要安装hexo-deployer-git
 ``` bash
-$ npm install hexo-deployer-git --save 
+$ npm install hexo-deployer-git --save
 ```
 再次执行命令之后，打开[https://seminelee.github.io/](https://seminelee.github.io/)就能看到你建立好的博客了！
 
